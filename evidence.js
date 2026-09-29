@@ -71,7 +71,7 @@
     });
   });
   set("#eng-body", rows.join(""));
-  set("#eng-lede", "Custo com saco kraft, como na aba Precificação N1. Combo = burger com seu kraft + R$ 7,76 (batata individual, Coca lata e embalagens do combo: a diferença que bate 5 linhas de combo da planilha). Margem em reais (Kasavana &amp; Smith), não só em porcentagem. * custo extrapolado: precisa de custeio oficial.");
+  set("#eng-lede", "Custo com saco kraft, como na aba Precificação N1. Combo = burger com seu kraft + R$ 7,76 (batata individual, Coca lata e embalagens do combo: a diferença que bate 5 linhas de combo da planilha). Margem em reais (Kasavana &amp; Smith), não só em porcentagem. * custo extrapolado: precisa de custeio oficial. Papéis preliminares, com vendas da rede: reclassificar em D+60 com as vendas do Portal (popular = 70% ou mais da média da categoria; lucrativo = margem em R$ acima da média ponderada da categoria).");
 
   /* ---------- referências ---------- */
   const REFS = [
@@ -90,18 +90,17 @@
 
   /* ---------- livros ---------- */
   const BOOKS = [
-    ["Delivering the Digital Restaurant", "Orsbourn & Sandland · 2023", "O cardápio faz parte do negócio digital inteiro: canal próprio, marketplace, dados do pedido e operação.", "O mesmo cardápio no iFood e no app próprio; no app, 5 to Free e funil medido de ponta a ponta."],
-    ["Food and Beverage Cost Control", "Hayes & Dopson · 8ª ed., 2026", "Decidir por margem em R$, não só por CMV %; adicionais como fração do item-base.", "Tabela de engenharia em R$; Turbine entre 12% e 20% do preço do burger."],
-    ["Foundations of Menu Planning", "Daniel Traster · 2ª ed.", "Ficha técnica, custo da receita, redação e engenharia de cardápio como um método só.", "Toda descrição foi conferida com a ficha técnica da planilha."],
-    ["The Strategy and Tactics of Pricing", "Nagle, Müller & Gruyaert · 7ª ed., 2023", "Estrutura de preço (versões, adicionais, pacotes) e conta de empate antes de dar desconto.", "Combo +R$ 16, Double pelo preço do item pronto, Dupla com a conta de empate (+25% de pares)."],
-    ["Using Behavioral Science in Marketing", "Nancy Harhut · 2022", "Prova social, enquadramento e arquitetura de escolha.", "Economia sempre em R$, selo só onde tem dado, escolha ativa no combo."],
-    ["Trustworthy Online Controlled Experiments", "Kohavi, Tang & Xu · 2020", "Uma métrica-mestra, guardrails e testes A/B confiáveis.", "Margem por visita como métrica e holdout no upsell."],
-    ["Successful Management in Foodservice Operations", "Hayes & Ninemeier · 2024", "A oferta só funciona se a cozinha executa com consistência.", "Itens novos com insumos que já estão no estoque; The Spicy só com o molho confirmado."],
-    ["The Restaurant Marketing Mindset", "Chip Klose · 2023", "Quem compra, em qual ocasião e por que escolher você.", "Categorias por ocasião: sozinho, pra dois e pra compartilhar."],
-    ["Decoded", "Phil Barden · 2ª ed., 2022", "Valor percebido é recompensa menos esforço; a maior parte das escolhas é no piloto automático.", "Menos etapas, preço final no botão, foto nas opções do modal."],
-    ["Franchise Your Business", "Mark Siebert · 2ª ed., 2024", "O que escala é o que está padronizado: ficha, porção, treino.", "Uma regra de combo, uma escada de camadas e um padrão de foto para todas as lojas."],
+    ["Foundations of Menu Planning", "Daniel Traster · 2ª ed. · cap. 7, 8, 10 e 11", "Engenharia de cardápio pela margem em R$, zona quente no topo, poucos selos e preço anunciado verdadeiro.", "Mudou hoje: The Onion Storm (margem R$ 30,64) entra nos Destaques no lugar do The Crunch; selos de 13 para 8 itens; o “separado” do Date Night vai para R$ 114,50, a soma com o burger mais barato."],
+    ["Practical Food and Beverage Cost Control", "Clement Ojugo · cap. 2, 10 e 13", "Ficha técnica e porção padrão; decidir por margem em R$, não pelo menor CMV %; venda sugestiva do item de maior margem.", "Mudou hoje: o Vira Double passa a ser a receita do Double pronto pelo mesmo preço; a lata avulsa sai da sacola quando o resgate do combo já traz a Coca."],
+    ["Using Behavioral Science in Marketing", "Nancy Harhut · cap. 5, 11 e 12", "Escolha ativa no lugar do opt-in, ancoragem pelo preço mais alto e preço por unidade.", "Confirma o combo como escolha ativa, sem nada pago marcado. Mudou hoje: Os Monstros antes do O Bonde; Date Night e O Bonde mostram o preço por pessoa (R$ 44,95 e R$ 42,48)."],
+    ["Decoded", "Phil Barden · 2ª ed. · cap. 2, 3 e 4", "Valor = recompensa − dor do preço; o pacote esconde o preço das partes; desconto permanente perde o efeito.", "Confirma o combo dentro do item, com a economia na tela, e o preço “separado” igual à soma real."],
+    ["Delivering the Digital Restaurant", "Meredith Sandland e Carl Orsbourn · cap. 8, 11 e 12", "Combo e complemento programados no fluxo digital; adicional que vende é o da casa; menu curto no celular; foto real.", "Mudou hoje: a Mostarda sai do molho pago (6 opções, dentro do guia do iFood). Pendência: fotografar os itens com imagem de IA antes do iFood."],
+    ["Restaurant Marketing: Competency Guide", "NRAEF ManageFirst · cap. 4 e 5", "Bundling e upselling sobem o ticket; desconto em excesso desvaloriza o preço cheio; promoção se mede antes, durante e depois.", "Confirma o combo em 100% dos burgers e a sobremesa no modal; reforça que todo “separado” é a soma real."],
+    ["Successful Service Operations Management", "Richard Metters, Kathryn King-Metters e Madeleine Pullman · cap. 7, 9 e 12", "O gargalo define a capacidade; linha curta e modular; tirar trabalho do horário de pico.", "Confirma a porção padrão (2 tiras por camada) e o kit único do combo. Plano de pico da fritadeira vai para a operação."],
+    ["How to Franchise Your Business", "Brian Duckett e Paul Monaghan · cap. 2, 14 e 16", "Formato fácil de aprender e de duplicar; uma regra só, documentada; margem bruta abaixo do esperado sinaliza desconto ou porção errada.", "Confirma a regra única de combo (+R$ 16) e a porção declarada em 13 de 13 burgers; o Vira Double com uma receita só por preço."],
   ];
-  set("#books", BOOKS.map((b, i) => `<article class="panel book rv"><div class="b-n">${String(i + 1).padStart(2, "0")}</div><div><h3>${b[0]}</h3><div class="b-a">${b[1]}</div><p>${b[2]}</p><div class="take">${b[3]}</div></div></article>`).join(""));
+  set("#books", BOOKS.map((b, i) => `<article class="panel book rv"><div class="b-n">${String(i + 1).padStart(2, "0")}</div><div><h3>${b[0]}</h3><div class="b-a">${b[1]}</div><p>${b[2]}</p><div class="take">${b[3]}</div></div></article>`).join("") +
+    `<p class="src books-note rv">Não auditados: The Strategy and Tactics of Pricing (Nagle), porque o PDF é escaneado e não tem texto, e Trustworthy Online Controlled Experiments (Kohavi, Tang e Xu), em formato AZW3. A conta de empate e o plano de testes seguem o método desses autores pelos sumários das editoras. Os livros foram usados só como referência: nenhum trecho é reproduzido aqui.</p>`);
 
   /* ---------- plano de teste + pendências ---------- */
   set(

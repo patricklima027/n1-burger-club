@@ -358,7 +358,9 @@
     const out = [];
     const inG = (l, ids) => l.opts.some((o) => ids.includes(o.g));
     const won = goalBase() >= D.goal.value;
-    if (!cartHas((it, l) => it.cat === "bebidas" || l.opts.some((o) => /coca/i.test(o.name)))) out.push("coca-lata");
+    // enquanto um resgate (combo ou Date Night) está na tela, a lata avulsa não concorre com ele
+    const rescueOn = state.cart.some((l) => (l.id === "dupla-clube" && !l.opts.some((o) => o.g === "completar")) || (["burgers", "doubles"].includes(byId[l.id].cat) && l.opts.some((o) => o.g === "combo" && o.id === "solo")));
+    if (!rescueOn && !cartHas((it, l) => it.cat === "bebidas" || l.opts.some((o) => /coca/i.test(o.name)))) out.push("coca-lata");
     if (!cartHas((it, l) => it.cat === "sobremesas" || inG(l, ["sobremesa"]))) out.push(...(won ? D.cross.dessertWon : D.cross.dessert));
     const hasVerde = cartHas((it, l) => ["the-original", "the-garden", "double-original", "dupla-clube", "a-monstra", "verde-n1"].includes(it.id) || l.opts.some((o) => o.id === "verde"));
     if (!cartHas((it, l) => it.cat === "molhos" || inG(l, ["molho"]))) out.push(hasVerde ? D.cross.sauceAlt : D.cross.sauce);

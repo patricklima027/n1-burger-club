@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Novo N1 Burger Club</title>
+<meta name="description" content="O novo cardápio do N1 Burger Club: protótipo navegável no layout do app Tastefy, filme de lançamento e a justificativa com dados de conversão, preço e ticket." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&family=Montserrat+Alternates:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="icon" href="img/brand/n1-badge.svg" />
+<link rel="preload" as="image" href="img/hero/casa-2880.jpg" imagesrcset="img/hero/casa-1600.jpg 1600w, img/hero/casa-2880.jpg 2880w" imagesizes="100vw" />
+<link rel="stylesheet" href="app.css?v=7" />
+<link rel="stylesheet" href="site.css?v=2" />
+<script>window.N1_HERO = { W: 3840, H: 2160, x0: 1686, y0: 482, x1: 2105, y1: 1386, r: 52 };</script>
+</head>
+<body>
+<script src="intro.js?v=2"></script>
+
+<div class="progress" aria-hidden="true"><i id="prog"></i></div>
+
+<header class="top">
+  <a class="brand" href="#hero" aria-label="N1 Burger Club — início">
+    <svg viewBox="0 0 193.4 100" aria-hidden="true"><path fill="#E21D24" d="M0 0 L0 100 L41 100 L41 50.6 L92.8 100 L143 100 L143 41.4 L130.9 41.4 L130.9 9.3 L141.8 0 L93.6 0 L93.6 44.7 L46.8 0Z"/><path fill="#E21D24" d="M158.6 0 L193.4 0 L193.4 100 L153.9 100 L153.9 33.2 L140.1 33.2 L140.1 12.6Z"/></svg>
+    <span>BURGER CLUB</span>
+  </a>
+  <nav class="top-links" aria-label="Seções">
+    <a href="#hero" data-goto-app>Cardápio</a>
+    <a href="#filme">Filme</a>
+    <a href="#mudancas">O que muda</a>
+    <a href="#funil">Funil</a>
+    <a href="#engenharia">CMV</a>
+    <a href="#referencias">Referências</a>
+    <a href="#simulador">Simulador</a>
+    <a href="#teste">Teste</a>
+  </nav>
+</header>
+
+<main>
+  <!-- ===== HERO: a câmera entra no celular do cliente ===== -->
+  <section id="hero" class="hero" aria-label="Protótipo navegável do cardápio">
+    <div class="hero-sticky">
+      <div class="world" id="world">
+        <img class="hero-img" id="hero-img" src="img/hero/casa-2880.jpg" srcset="img/hero/casa-1600.jpg 1600w, img/hero/casa-2880.jpg 2880w" sizes="100vw" alt="Cliente em casa, no sofá, abrindo o cardápio do N1 Burger Club no celular; sobre a mesa, a sacola kraft “Bem-vindo ao clube.”, o burger embrulhado com o selo, batata e Coca." />
+        <div class="hero-shade" id="hero-shade"></div>
+        <div class="app-slot" id="app-slot">
+          <div class="app" id="cardapio">
+            <div id="app-scroll">
+              <div id="store"></div>
+              <label class="search" for="q">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="2.4" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                <input id="q" type="search" placeholder="Buscar no cardápio" autocomplete="off" />
+              </label>
+              <div id="featured"></div>
+              <nav id="tabs" aria-label="Categorias"></nav>
+              <div id="sections"></div>
+              <div class="app-foot">Protótipo navegável · nenhum pedido é enviado. Imagens marcadas como ilustrativas foram geradas por IA a partir das fotos reais da marca.</div>
+            </div>
+            <button id="bag" type="button" hidden>
+              <div class="bag-top"><span id="bag-n"></span><span>Ver sacola · <span id="bag-t"></span></span></div>
+              <div id="bag-goal"></div>
+              <div class="bag-bar"><i id="bag-bar-fill"></i></div>
+            </button>
+            <div id="sheet" class="sheet" hidden>
+              <button class="sh-x" data-close-sheet aria-label="Fechar">×</button>
+              <div class="sh-card" role="dialog" aria-label="Detalhes do item">
+                <div class="sh-body"></div>
+                <div class="sh-foot">
+                  <div class="qty"><button id="qty-m" type="button" aria-label="Diminuir">−</button><span id="qty-n">1</span><button id="qty-p" type="button" aria-label="Aumentar">+</button></div>
+                  <button id="add-btn" class="btn-y" type="button">Adicionar</button>
+                </div>
+              </div>
+            </div>
+            <div id="cart" class="sheet" hidden>
+              <button class="sh-x" data-close-cart aria-label="Fechar">×</button>
+              <div class="sh-card" role="dialog" aria-label="Sacola">
+                <div class="sh-body"></div>
+                <div class="sh-foot" id="cart-foot"><button id="checkout" class="btn-y" type="button">Fazer pedido</button></div>
+              </div>
+            </div>
+            <div id="why-pop" hidden></div>
+            <div id="toast" role="status" hidden></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-copy" id="hero-copy">
+        <div class="hero-glass glass"></div>
+        <div class="kicker">RE:MENU · Tastefy · 2026</div>
+        <h1 class="shatter" data-shatter aria-label="Apresentamos o novo N1 Burger Club.">Apresentamos<br>o novo<br><em>N1 Burger Club.</em></h1>
+        <p class="hero-lede">Um cardápio redesenhado com dados de conversão, preço e ticket do Brasil e dos EUA. Role para entrar no celular.</p>
+      </div>
+      <div class="hero-cue" id="hero-cue" aria-hidden="true"><span>Role</span><i></i></div>
+      <div class="hero-credit">Imagem ilustrativa gerada por IA com a embalagem oficial da marca.</div>
+
+      <aside class="side side-l glass" id="side-l" aria-label="Por que cada seção existe">
+        <div class="side-k">Por quê · ao vivo</div>
+        <div id="why-now" aria-live="polite"></div>
+        <p class="hint">Role o cardápio dentro do celular: este painel explica cada seção. Toque nos <kbd>?</kbd> e abra qualquer item para ver combo e upsell.</p>
+      </aside>
+      <aside class="side side-r glass" id="side-r" aria-label="Números da proposta">
+        <div class="side-k">A proposta em 4 números</div>
+        <div class="kpis" id="kpis"></div>
+        <a class="next" href="#filme">Ver o filme <span aria-hidden="true">↓</span></a>
+      </aside>
+    </div>
+  </section>
+
+  <div class="ribbon" data-ribbon="-420" aria-hidden="true"><div>NÃO É HAMBÚRGUER. <b>É CHICKEN BURGER.</b> · BEM-VINDO AO CLUBE. · NÃO É HAMBÚRGUER. <b>É CHICKEN BURGER.</b> · BEM-VINDO AO CLUBE. · NÃO É HAMBÚRGUER. <b>É CHICKEN BURGER.</b> ·</div></div>
+
+  <!-- ===== FILME: cresce até a tela inteira ===== -->
+  <section id="filme" class="film" aria-label="Filme de lançamento do cardápio">
+    <div class="film-sticky">
+      <div class="film-head" id="film-head">
+        <div class="kicker">O filme · sem locução</div>
+        <h2>Um cardápio <em>novo</em> merece um lançamento.</h2>
+      </div>
+      <div class="film-frame" id="film-frame">
+        <video id="video" playsinline muted loop preload="metadata" poster="video/poster.jpg?v=4">
+          <source src="video/n1-lancamento.mp4?v=4" type="video/mp4" />
+        </video>
+        <div class="film-ctrl glass" role="group" aria-label="Controles do filme">
+          <button id="f-play" type="button" aria-label="Reproduzir" data-state="paused"><i></i></button>
+          <button id="f-sound" type="button" data-state="off"><span>Ativar som</span></button>
+          <span id="f-time" class="f-time">0:00</span>
+          <button id="f-full" type="button" aria-label="Tela cheia">Tela cheia</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== O que muda ===== -->
+  <section class="band band-mesh" id="mudancas">
+    <div class="band-in">
+      <div class="kicker rv">O que muda</div>
+      <h2 class="rv">Mantém o que <em>funciona</em>. Muda o que trava.</h2>
+      <p class="lede rv" id="mudancas-lede"></p>
+      <div class="cards" id="changes"></div>
+    </div>
+    <img class="float-cut" data-parallax="120" src="img/cut/the-bbc.webp" alt="" aria-hidden="true" />
+  </section>
+
+  <!-- ===== Funil ===== -->
+  <section class="band" id="funil">
+    <div class="band-in grid-2">
+      <div>
+        <div class="kicker rv">Onde o pedido se perde</div>
+        <h2 class="rv">O gargalo é <em>ver</em> e <em>adicionar</em>. Não o checkout.</h2>
+        <p class="lede rv">Na rede Tastefy, as marcas com cardápio próprio convertem de 13,7% a 16,4% das visitas em pedido. Uma loja de burger da rede com o mesmo cardápio, preço e foto da marca-mãe converteu 6,8%. A diferença está em ver o item (62% contra 46%) e em adicionar à sacola (48% contra 36%).</p>
+        <p class="src rv">Fonte: planilha “Conversão 2026 – Funil de vendas”, iFood, jan–mar/2026, soma da rede por marca. A meta do N1 Burger Club é projeção, não resultado.</p>
+      </div>
+      <div class="glass chart-card rv"><div id="funnel-chart"></div></div>
+    </div>
+  </section>
+
+  <!-- ===== Antes x depois ===== -->
+  <section class="band band-mesh" id="antes-depois">
+    <div class="band-in">
+      <div class="kicker rv">Antes × depois</div>
+      <h2 class="rv">Cada mudança com <em>um motivo</em> e uma fonte</h2>
+      <div class="tbl-wrap glass rv">
+        <table>
+          <thead><tr><th>Tema</th><th>Hoje</th><th>Novo cardápio</th><th>Por quê</th></tr></thead>
+          <tbody id="ba-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Engenharia ===== -->
+  <section class="band" id="engenharia">
+    <div class="band-in">
+      <div class="kicker rv">Engenharia de cardápio · planilha CMV 2026</div>
+      <h2 class="rv">Cada item tem <em>papel</em>, preço e custo</h2>
+      <p class="lede rv" id="eng-lede">Custo com saco kraft, como na aba Precificação N1. Margem em reais (Kasavana &amp; Smith), não só em porcentagem. Papéis seguem a nomenclatura da própria planilha.</p>
+      <div class="rules rv" id="rules"></div>
+      <div class="tbl-wrap glass rv">
+        <table>
+          <thead><tr><th>Item</th><th>Categoria</th><th class="num">Preço</th><th class="num">Custo</th><th class="num">CMV</th><th class="num">Margem R$</th><th>Papel</th></tr></thead>
+          <tbody id="eng-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Referências ===== -->
+  <section class="band band-mesh" id="referencias">
+    <div class="band-in">
+      <div class="kicker rv">Referências · EUA e Brasil</div>
+      <h2 class="rv">O que cada marca <em>ensinou</em></h2>
+      <p class="lede rv">Benchmark de 28/09/2026 com sites, trade press e cardápios publicados. Preços de fora são aproximados.</p>
+      <div class="cols-3" id="refs"></div>
+    </div>
+  </section>
+
+  <!-- ===== Livros ===== -->
+  <section class="band" id="livros">
+    <div class="band-in">
+      <div class="kicker rv">Biblioteca indicada pelo Victor (#ia-turma2)</div>
+      <h2 class="rv">10 livros, <em>10 decisões</em></h2>
+      <p class="lede rv">O conceito central de cada livro, pelo sumário e pela descrição das editoras, aplicado a uma decisão concreta do cardápio.</p>
+      <div class="cols-2" id="books"></div>
+    </div>
+  </section>
+
+  <!-- ===== Simulador ===== -->
+  <section class="band band-mesh" id="simulador">
+    <div class="band-in">
+      <div class="kicker rv">Simulador de ticket médio</div>
+      <h2 class="rv">Mexa nas <em>premissas</em></h2>
+      <p class="lede rv">Ticket = burger médio + (chance de cada adicional × valor dele). “Hoje” usa a estimativa do plano da marca (R$ 45 a R$ 50) até entrarem os dados reais do Portal do Parceiro.</p>
+      <div id="sim" class="rv"></div>
+    </div>
+  </section>
+
+  <!-- ===== Plano de teste ===== -->
+  <section class="band" id="teste">
+    <div class="band-in">
+      <div class="kicker rv">Como provar que funcionou</div>
+      <h2 class="rv">Uma métrica-mestra e <em>testes</em> em ordem</h2>
+      <div class="cols-2" id="test-plan"></div>
+      <div class="glass pend rv" id="pendencias"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot-brand">
+    <svg viewBox="0 0 193.4 100" aria-hidden="true"><path fill="#E21D24" d="M0 0 L0 100 L41 100 L41 50.6 L92.8 100 L143 100 L143 41.4 L130.9 41.4 L130.9 9.3 L141.8 0 L93.6 0 L93.6 44.7 L46.8 0Z"/><path fill="#E21D24" d="M158.6 0 L193.4 0 L193.4 100 L153.9 100 L153.9 33.2 L140.1 33.2 L140.1 12.6Z"/></svg>
+    <span>Bem-vindo ao clube.</span>
+  </div>
+  <p>Novo N1 Burger Club · protótipo para o desafio RE:MENU da Tastefy · layout baseado no app próprio (app.tastefy.com.br) · fotos oficiais da marca e imagens ilustrativas geradas por IA a partir delas.</p>
+</footer>
+
+<script src="menu-data.js?v=13"></script>
+<script src="app.js?v=11"></script>
+<script src="evidence.js?v=12"></script>
+<script src="funnel.js?v=3"></script>
+<script src="hero.js?v=4"></script>
+</body>
+</html>

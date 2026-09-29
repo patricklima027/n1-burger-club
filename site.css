@@ -179,3 +179,23 @@ body {
   .hero-cue i { animation: none; }
   .rv { transition: none; }
 }
+
+/* ---------- comparativo iFood × novo ---------- */
+.cmp-h { font-family: var(--label); font-weight: 400; font-size: 22px; letter-spacing: 0.06em; color: var(--bone); margin: 34px 0 12px; }
+.cmp-cards { max-width: none; }
+.cmp-cards .n { font-size: 34px; }
+table.cmp { min-width: 980px; }
+table.cmp-funnel { min-width: 720px; }
+table.cmp td.pos { color: #7fe0a0; font-weight: 800; }
+table.cmp td.neg { color: #ff9a8a; font-weight: 800; }
+.cmp-note { margin-top: 10px; max-width: 110ch; line-height: 1.5; }
+.cmp-risk { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 34px; align-items: stretch; }
+@media (max-width: 899px) { .cmp-risk { grid-template-columns: 1fr; } .cmp-h { font-size: 19px; } }
+.cmp-risk .panel h3 { font-family: var(--label); font-weight: 400; font-size: 22px; letter-spacing: 0.06em; color: var(--bone); }
+.cmp-floor { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr); gap: 18px; align-items: center; margin-top: 22px; padding: 18px 22px; border-radius: 18px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(255, 255, 255, 0.04); }
+.cmp-floor b { display: block; font-family: var(--label); font-weight: 400; font-size: 22px; letter-spacing: 0.06em; color: var(--bone); }
+.cmp-floor span { font-size: 13.5px; color: rgba(244, 239, 225, 0.72); }
+.cmp-floor em { font-style: normal; color: var(--gold); }
+.cmp-floor ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 18px; font-size: 13.5px; color: rgba(244, 239, 225, 0.8); }
+.cmp-floor li b { display: inline; font-family: var(--display); font-size: 22px; letter-spacing: 0; margin-right: 6px; }
+@media (max-width: 899px) { .cmp-floor { grid-template-columns: 1fr; } .cmp-floor ul { grid-template-columns: 1fr; } }

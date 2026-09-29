@@ -10,8 +10,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&family=Montserrat+Alternates:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <link rel="icon" href="img/brand/n1-badge.svg" />
 <link rel="preload" as="image" href="img/hero/casa-2880.jpg" imagesrcset="img/hero/casa-1600.jpg 1600w, img/hero/casa-2880.jpg 2880w" imagesizes="100vw" />
-<link rel="stylesheet" href="app.css?v=7" />
-<link rel="stylesheet" href="site.css?v=3" />
+<link rel="stylesheet" href="app.css?v=9" />
+<link rel="stylesheet" href="site.css?v=5" />
 <script>window.N1_HERO = { W: 3840, H: 2160, x0: 1686, y0: 482, x1: 2105, y1: 1386, r: 52 };</script>
 </head>
 <body>
@@ -28,6 +28,7 @@
     <a href="#hero" data-goto-app>Cardápio</a>
     <a href="#filme">Filme</a>
     <a href="#mudancas">O que muda</a>
+    <a href="#ifood">iFood × novo</a>
     <a href="#funil">Funil</a>
     <a href="#engenharia">CMV</a>
     <a href="#referencias">Referências</a>
@@ -140,13 +141,91 @@
     <img class="float-cut" data-parallax="120" src="img/cut/the-bbc.webp" alt="" aria-hidden="true" />
   </section>
 
+  <!-- ===== Comparativo com o cardápio anterior (iFood) ===== -->
+  <section class="band" id="ifood">
+    <div class="band-in">
+      <div class="kicker rv">Comparativo · cardápio anterior (N1 Burguers no iFood) × novo cardápio</div>
+      <h2 class="rv">Mesma cozinha, mesmas fichas. <em>Outra arquitetura</em> de pedido.</h2>
+      <p class="lede rv">As fichas técnicas são as mesmas dos dois lados. No cardápio anterior, o combo não existe dentro de nenhum burger, o preço é promoção permanente e aceitar a sugestão do próprio item pode sair mais caro que o pacote pronto. No novo, todo burger vira combo no 1º passo e o preço volta à tabela da planilha. Resultado, com custo só da planilha: a margem por pedido sobe em 6 das 8 ocasiões comparáveis; nas 2 em que cai, o cliente paga menos, de propósito.</p>
+      <p class="src rv">Fontes: material do Portal do Parceiro de 28/09 (“Teste - N1 Burguers”), página pública do iFood da loja N1 Burguers, Santa Cruz do Sul (captura de 29/09/2026, 9h30), e planilha CMV 2026 (fichas técnicas, aba Precificação N1). As tabelas usam os preços da página de 29/09.</p>
+
+      <h3 class="cmp-h rv">O que o cliente encontra hoje no iFood</h3>
+      <div class="cards cmp-cards">
+        <article class="card glass rv"><div class="n">0 de 8</div><h3>Burgers com combo no item</h3><p>B.B.C. + batata + lata montado pelo burger: R$ 61,97. O mesmo pedido pelo Trio: R$ 47,98, que fica em outra categoria (Super Ofertas).</p></article>
+        <article class="card glass rv"><div class="n">4 quase iguais</div><h3>Pacotes “2 burgers + X”</h3><p>De R$ 54,99 a R$ 74,99, mudam um componente só (Coca média, Bites, Batata Super + maionese ou acompanhamento Super). Os nomes são de promoção: “Super Combo”, “4 em N1”.</p></article>
+        <article class="card glass rv"><div class="n">“tags:”</div><h3>SEO na descrição</h3><p>As descrições das ofertas mostram ao cliente a lista de palavras-chave (“promoção, promoção, jantar…”). Os burgers não dizem quantas tiras levam.</p></article>
+        <article class="card glass rv"><div class="n">5% a 28%</div><h3>De/por permanente</h3><p>Quase tudo tem preço riscado. O “de” do BBC (R$ 45,99) fica 15% acima do preço de tabela da planilha (R$ 39,90).</p></article>
+        <article class="card glass rv"><div class="n">+R$ 1,99</div><h3>Upsell mais caro que o pronto</h3><p>Trio + Brigadeiro no modal: R$ 49,98. O 4 em N1 pronto, com o mesmo conteúdo: R$ 47,99.</p></article>
+        <article class="card glass rv"><div class="n">0</div><h3>Molho, Double ou adicional</h3><p>Nenhum burger oferece molho, Double ou adicional no lanche. O combo da Galera não tem molho nem sobremesa. A lata custa R$ 11,99.</p></article>
+      </div>
+
+      <h3 class="cmp-h rv">Ocasião por ocasião, com o custo da planilha</h3>
+      <div class="tbl-wrap glass rv">
+        <table class="cmp">
+          <thead><tr><th>Ocasião</th><th>Cardápio anterior</th><th class="num">Preço</th><th class="num">CMV</th><th class="num">Margem</th><th>Novo cardápio</th><th class="num">Preço</th><th class="num">CMV</th><th class="num">Margem</th><th class="num">Diferença de margem</th></tr></thead>
+          <tbody>
+            <tr><td><b>Solo</b> · Original + batata + Coca</td><td>Trio Burger N1</td><td class="num">R$ 41,99</td><td class="num">30,5%</td><td class="num">R$ 29,20</td><td>Combo The Original</td><td class="num">R$ 47,90</td><td class="num">30,9%</td><td class="num">R$ 33,12</td><td class="num pos">+R$ 3,92</td></tr>
+            <tr><td><b>Solo</b> · B.B.C. + batata + Coca</td><td>Trio com BBC</td><td class="num">R$ 47,98</td><td class="num">29,7%</td><td class="num">R$ 33,72</td><td>Combo The B.B.C.</td><td class="num">R$ 55,90</td><td class="num">29,1%</td><td class="num">R$ 39,65</td><td class="num pos">+R$ 5,93</td></tr>
+            <tr><td><b>Solo</b> · o mesmo, montado pelo burger</td><td>BBC + batata + lata no modal</td><td class="num">R$ 61,97</td><td class="num">22,8%</td><td class="num">R$ 47,82</td><td>Combo The B.B.C.</td><td class="num">R$ 55,90</td><td class="num">29,1%</td><td class="num">R$ 39,65</td><td class="num neg">−R$ 8,17</td></tr>
+            <tr><td><b>Solo com sobremesa</b></td><td>4 em N1 (com brigadeiro)</td><td class="num">R$ 47,99</td><td class="num">30,9%</td><td class="num">R$ 33,18</td><td>Combo The Original + Brigadeiro</td><td class="num">R$ 57,80</td><td class="num">29,1%</td><td class="num">R$ 41,00</td><td class="num pos">+R$ 7,82</td></tr>
+            <tr><td><b>Casal</b> · 2 burgers + Batata Super + molho</td><td>2 burguers + Batata Super + Maionese</td><td class="num">R$ 67,99</td><td class="num">32,5%¹</td><td class="num">R$ 45,86</td><td>Dupla + Batata Super</td><td class="num">R$ 72,90</td><td class="num">32,5%</td><td class="num">R$ 49,20</td><td class="num pos">+R$ 3,34</td></tr>
+            <tr><td><b>Casal</b> · 2 burgers + acomp. super + bebida</td><td>Super Combo (Coca média)</td><td class="num">R$ 74,99</td><td class="num">36,4%²</td><td class="num">R$ 47,70</td><td>Date Night (2 latas)</td><td class="num">R$ 89,90</td><td class="num">33,7%</td><td class="num">R$ 59,56</td><td class="num pos">+R$ 11,86</td></tr>
+            <tr><td><b>Casal completo</b> · cesta montada + 2 latas</td><td>2 burguers + Batata Super + Maionese + 2 latas</td><td class="num">R$ 91,97</td><td class="num">31,3%¹</td><td class="num">R$ 63,20</td><td>Date Night</td><td class="num">R$ 89,90</td><td class="num">33,7%</td><td class="num">R$ 59,56</td><td class="num neg">−R$ 3,64</td></tr>
+            <tr><td><b>Galera</b> · 4 burgers + Batata Mega + Coca grande</td><td>Combo N1 da Galera</td><td class="num">R$ 144,99</td><td class="num">35,0%¹</td><td class="num">R$ 94,29</td><td>O Bonde</td><td class="num">R$ 169,90</td><td class="num">30,3%</td><td class="num">R$ 118,48</td><td class="num pos">+R$ 24,19</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="src cmp-note rv">Margem = preço − CMV, sobre o preço “por” de 29/09 e antes da comissão do iFood (a comissão incide sobre o aumento de preço, então o ganho líquido é menor). Mesma regra de custo em todas as linhas do anterior: as linhas N1 da própria planilha (R$ 0,43 de embalagem por burger, como no “Trio Burguer N1”); o novo usa as linhas do Burger Club (R$ 2,42 por combo). É a base mais favorável ao anterior: por ela, o CMV% do combo de 1 pessoa empata e o ganho aparece na margem em reais. ¹ Derivado das linhas N1 (fichas + acompanhamento + bebida + embalagem); a lata da bebida opcional é premissa. ² Aproximação: a linha “Super Combo” da planilha usa 2 latas no lugar da Coca média. No material de 28/09, o Trio aparece a R$ 39,99 (CMV 32,0%, margem R$ 27,20): contra ele, o Combo The Original rende +R$ 5,92. Preço de tabela contra preço de tabela, o novo sai mais barato: Trio “de” R$ 51,99 × Combo The Original R$ 47,90. Ficam fora por não ter custo na planilha: 2 Burgers + Coca Média Grátis, 2 Burguers + Chicken Bites, Raiz Prime, Mac'n Cheese, polenta, Coca média, Fanta e água.</p>
+
+      <div class="cmp-floor rv">
+        <div><b>Piso de conversão</b><span>O novo empata a margem por visita mesmo se a conversão <em>cair</em> de 6,8% para:</span></div>
+        <ul><li><b>6,0%</b> no Combo The Original</li><li><b>5,8%</b> no Combo The B.B.C.</li><li><b>6,3%</b> na Dupla + Batata Super</li><li><b>5,4%</b> no O Bonde</li><li><b>8,2%</b> é o que o caminho “montado pelo burger” precisa, o único que pede mais conversão</li></ul>
+      </div>
+
+      <h3 class="cmp-h rv">Onde o pedido se perde, e o que o novo faz</h3>
+      <div class="tbl-wrap glass rv">
+        <table class="cmp cmp-funnel">
+          <thead><tr><th>Etapa</th><th>Cardápio anterior</th><th>Novo cardápio</th></tr></thead>
+          <tbody>
+            <tr><td><b>Ver o item</b></td><td>8 ofertas que se sobrepõem, com nomes de promoção; descrição com “tags:”; burgers sem dizer quantas tiras.</td><td>Vitrine por ocasião (Pra Dois, Pra Compartilhar, Burgers) com “serve X pessoas”; nomes do plano da marca; descrição igual à ficha técnica (“2 tiras de sassami de frango”).</td></tr>
+            <tr><td><b>Adicionar</b></td><td>Quem entra pelo burger paga preço cheio: sem combo, +R$ 13,99 no B.B.C. Para 1 pessoa, o burger avulso aparece em mais pedidos da rede N1 Chicken (cerca de 35 mil em 2025, sem os itens Festival) do que o Trio (cerca de 16 mil). Pacotes com 3 passos obrigatórios de uma opção só.</td><td>“Vira Combo N1?” é o 1º passo de todo burger, Double e Triple, com a economia de R$ 5,80 na tela e a Coca já marcada (sem custo). Nenhum passo obrigatório de opção única. Combo, Vira Double, molho, sobremesa e os degraus da Dupla saem iguais ou mais baratos que o avulso.</td></tr>
+            <tr><td><b>Fechar o pedido</b></td><td>Nenhuma meta de pedido na loja; lata a R$ 11,99.</td><td>Sacola que completa o pedido (bebida, sobremesa, molho, combo) e barra “faltam R$ X para o Brigadeiro”; lata a R$ 9,90.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="src cmp-note rv">Um cardápio copiado não dá motivo para escolher esta loja: com o mesmo cardápio, preço e foto da marca-mãe, a loja de burger da rede converteu 6,8% das visitas (iFood, jan–mar/2026); a N1 Chicken, 15,9%. Contra a N1 Chicken, 68% da diferença está em ver o item e adicionar, etapas em que o cardápio pesa junto com marca, avaliações e ranking; contra a Projeto Brasa (hamburgueria, 16,4%), pesa mais o adicionar e a compra. <b>META</b>, projeção e não resultado: só com ver o item e adicionar em 55%–58% e 44%–48%, a conversão vai a cerca de 10% (9,9% a 11,4%); os 12% a 13% pedem também compra de 52% ou mais (taxa, nota e tempo). A linha de base real da loja sai do funil do Portal do Parceiro.</p>
+
+      <h3 class="cmp-h rv">Um caminho por persona</h3>
+      <div class="cards cmp-cards">
+        <article class="card glass rv"><div class="n">R$ 45,90</div><h3>Solo de Sextou · R$ 38 a R$ 52</h3><p>4 dos 7 combos cabem na faixa (The Smoke R$ 45,90, The Original R$ 47,90, The Crunch R$ 48,90, The Garden R$ 49,90). Acima dela, o upsell: Combo The B.B.C. + Churros + Brigadeiro, R$ 73,80, e a sacola avisa que faltam R$ 1,10 para o brinde.</p></article>
+        <article class="card glass rv"><div class="n">54,90 → 89,90</div><h3>Casal Casual · R$ 60 a R$ 85</h3><p>Dupla R$ 54,90 → Dupla + Batata Super R$ 72,90, dentro da faixa, → Date Night R$ 89,90 como upsell, tudo no modal da Dupla.</p></article>
+        <article class="card glass rv"><div class="n">R$ 169,90</div><h3>Galera de Sábado · R$ 130 a R$ 170</h3><p>O Bonde começa no teto do orçamento, até 11% abaixo de 4 combos individuais, com CMV de 30,3%; molho e sobremesa pra galera são escolha. Os Monstros (R$ 219,90, com 2 molhos) ficam como âncora de teto.</p></article>
+      </div>
+
+      <div class="cmp-risk">
+        <div class="panel glass rv"><h3>O que assumimos</h3>
+          <ul><li><b>Preço de tabela:</b> os combos de 1 pessoa ficam de R$ 3,91 a R$ 9,92 acima do Trio; o Date Night, R$ 14,91 acima do Super Combo; O Bonde, R$ 24,91 acima da Galera. A defesa é a margem por visita (piso acima).</li>
+          <li><b>Quem paga o de/por:</b> as contas usam o “por”, que é o que o cliente paga. Se parte do desconto for bancada pelo iFood, a loja recebe mais e a vantagem do novo diminui. Conferir o repasse no Financeiro do Portal antes de lançar; o novo pode entrar nas mesmas campanhas da plataforma.</li>
+          <li><b>CMV do combo:</b> os combos de 1 pessoa ficam de 1,1 a 4,6 p.p. acima da meta do plano para a categoria (28%); a compensação vem do consolidado, com burgers a 21%–23% e molhos e doces a 19%–27%.</li>
+          <li><b>Brinde:</b> Brigadeiro (R$ 2,02) acima de R$ 74,90, sem contar os combos Pra Dois e Compartilhar, que passam da meta sozinhos.</li>
+          <li><b>Lacunas:</b> não há item para 3 pessoas (o anterior tem 3 Burguers a R$ 64,99) nem 2 burgers + Chicken Bites; e 3 destaques ainda usam imagem de IA, que precisa virar foto antes do iFood.</li></ul></div>
+        <div class="panel glass rv"><h3>Como provar</h3>
+          <ul><li><b>Linha de base:</b> funil, ticket médio, itens mais vendidos e repasse da loja de Santa Cruz no Portal, últimas 4 semanas.</li>
+          <li><b>Métrica-mestra:</b> margem por visita (conversão × margem por pedido), não só ticket.</li>
+          <li><b>Conversão:</b> antes × depois, 4 + 4 semanas no funil do Portal, comparando com as lojas da mesma especialidade na cidade.</li>
+          <li><b>No modal (A/B):</b> passo do combo, sobremesa e “Peça também” com holdout. Taxas altas medem rápido: levar o combo de 45% para 55% pede cerca de 390 modais abertos por versão.</li>
+          <li><b>Guardrails:</b> etapa de compra (Revisão → Concluídos), CMV consolidado até 28%, cancelamento e nota a partir de 4,7.</li></ul></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== Funil ===== -->
   <section class="band" id="funil">
     <div class="band-in grid-2">
       <div>
         <div class="kicker rv">Onde o pedido se perde</div>
         <h2 class="rv">O gargalo maior é <em>ver</em> e <em>adicionar</em>.</h2>
-        <p class="lede rv">Na rede Tastefy, as marcas com cardápio próprio convertem de 13,7% a 16,4% das visitas em pedido. Uma loja de burger da rede com o mesmo cardápio, preço e foto da marca-mãe converteu 6,8%. A maior parte da diferença está em ver o item (62% contra 46%) e em adicionar à sacola (48% contra 36%); a etapa de compra também fica abaixo (55% contra 44%).</p>
+        <p class="lede rv">Na rede Tastefy, as marcas com cardápio próprio convertem de 13,7% a 16,4% das visitas em pedido. Uma loja de burger da rede com o mesmo cardápio, preço e foto da marca-mãe converteu 6,8%. Contra a N1 Chicken (15,9%), a maior parte da diferença está em ver o item (62% contra 46%) e em adicionar à sacola (48% contra 36%); a etapa de compra também fica abaixo (55% contra 44%). Parte disso é marca, avaliações e ranking, não só cardápio.</p>
         <p class="src rv">Fonte: planilha “Conversão 2026 – Funil de vendas”, iFood, jan–mar/2026, soma da rede por marca. A meta do N1 Burger Club é projeção, não resultado.</p>
       </div>
       <div class="glass chart-card rv"><div id="funnel-chart"></div></div>
@@ -156,11 +235,11 @@
   <!-- ===== Antes x depois ===== -->
   <section class="band band-mesh" id="antes-depois">
     <div class="band-in">
-      <div class="kicker rv">Antes × depois</div>
+      <div class="kicker rv">Antes × depois · rascunho anterior do app próprio</div>
       <h2 class="rv">Cada mudança com <em>um motivo</em> e uma fonte</h2>
       <div class="tbl-wrap glass rv">
         <table>
-          <thead><tr><th>Tema</th><th>Hoje</th><th>Novo cardápio</th><th>Por quê</th></tr></thead>
+          <thead><tr><th>Tema</th><th>Rascunho do app</th><th>Novo cardápio</th><th>Por quê</th></tr></thead>
           <tbody id="ba-body"></tbody>
         </table>
       </div>
@@ -208,7 +287,7 @@
     <div class="band-in">
       <div class="kicker rv">Simulador de ticket médio</div>
       <h2 class="rv">Mexa nas <em>premissas</em></h2>
-      <p class="lede rv">Ticket = burger médio + (chance de cada adicional × valor dele). “Hoje” usa a estimativa do plano da marca (R$ 45 a R$ 50) até entrarem os dados reais do Portal do Parceiro.</p>
+      <p class="lede rv">Ticket = burger médio + (chance de cada adicional × valor dele). “Hoje” usa as premissas do plano da marca (ticket de R$ 45 a R$ 50), não o iFood item a item: a comparação com o iFood está na seção “iFood × novo”.</p>
       <div id="sim" class="rv"></div>
     </div>
   </section>
@@ -232,9 +311,9 @@
   <p>Novo N1 Burger Club · protótipo para o desafio RE:MENU da Tastefy · layout baseado no app próprio (app.tastefy.com.br) · fotos oficiais da marca e imagens ilustrativas geradas por IA a partir delas.</p>
 </footer>
 
-<script src="menu-data.js?v=15"></script>
-<script src="app.js?v=12"></script>
-<script src="evidence.js?v=13"></script>
+<script src="menu-data.js?v=18"></script>
+<script src="app.js?v=14"></script>
+<script src="evidence.js?v=15"></script>
 <script src="funnel.js?v=3"></script>
 <script src="hero.js?v=5"></script>
 </body>

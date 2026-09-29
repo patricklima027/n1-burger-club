@@ -22,7 +22,7 @@
   const priceLine = (it, big) => {
     const p = startPrice(it);
     const pre = it.fromLabel ? `<span class="pfx">a partir de</span> ` : "";
-    const old = it.old ? `<s class="old">${brl(it.old)}</s>` : "";
+    const old = it.old ? `<span class="old">separado <s>${brl(it.old)}</s></span>` : "";
     const save = it.old ? `<span class="save">economize ${brl(it.old - p)}</span>` : "";
     return `<span class="price ${big ? "big" : ""}">${pre}${brl(p)}</span>${old}${save}`;
   };
@@ -39,6 +39,7 @@
         <div class="p-sub">${esc(s.tagline)}</div>
         <div class="p-line"><span>★ ${esc(s.rating)}</span><span>${esc(s.eta)}</span><span>${esc(s.fee)}</span></div>
         <div class="club-strip">${esc(s.club)}</div>
+        <div class="club-strip goal-strip">Pedido acima de ${brl(D.goal.value)} ganha ${esc(D.goal.gift)} · fora combos Pra Dois e Compartilhar</div>
       </div>`;
   }
 
@@ -195,6 +196,18 @@
     return `Escolha de ${g.min} a ${g.max}`;
   }
 
+  const dessertSel = (it) => {
+    const g = visGroups(it).find((x) => x.id === "sobremesa");
+    return g ? g.options.reduce((s, o) => s + (o.price || 0) * ((state.sel[g.id] || {})[o.id] || 0), 0) : 0;
+  };
+  const goalLeftBefore = (it) => D.goal.value - (goalBase() + (goalSkip(it) ? 0 : (it.price + extrasTotal(it) - dessertSel(it)) * state.qty));
+  const sobHint = (it, g) => {
+    const left = goalLeftBefore(it);
+    const per = state.qty > 1 && g.max === 1 ? " · 1 por burger" : "";
+    if (goalSkip(it)) return g.hint;
+    if (left <= 0) return `Opcional · ${D.goal.gift} já vai de brinde neste pedido${per}`;
+    return `${g.hint}${per}`;
+  };
   function renderSheet() {
     const it = state.open;
     const body = $("#sheet .sh-body");
@@ -212,24 +225,27 @@
             const ok = !g.min || c >= g.min;
             return `
           <section class="grp ${g.style === "cards" ? "grp-cards" : ""} ${g.highlight ? "grp-hl" : ""}" data-g="${g.id}">
-            <div class="grp-h"><div><div class="grp-t">${esc(g.title)}</div><div class="grp-s">${esc(g.hint || groupSub(g))}</div></div>
+            <div class="grp-h"><div><div class="grp-t">${esc(g.title)}</div><div class="grp-s">${esc(g.id === "sobremesa" ? sobHint(it, g) : g.hint || groupSub(g))}</div></div>
               <div class="grp-st">${g.min ? (ok ? `<span class="ok">✓ OK</span>` : `<span class="req">OBRIGATÓRIO</span>`) : `<span class="cnt">${c}/${g.max}</span>`}</div></div>
             <div class="opts">${g.options
               .map((o) => {
                 const n = (state.sel[g.id] || {})[o.id] || 0;
-                const radio = g.max === 1;
+                const radio = g.max === 1 && !g.addon;
                 const priceTxt = o.price ? `+ ${brl(o.price)}` : o.priceNote || (g.min && o.id !== "solo" ? "incluso" : "");
+                const left = g.id === "sobremesa" && !goalSkip(it) ? goalLeftBefore(it) : 1e9;
+                const goalTag = g.id === "sobremesa" && left > 0 && left < 1e9 && o.price * state.qty >= left ? '<span class="s-goal">ganha o brinde</span>' : "";
+                const oDesc = g.id === "sobremesa" && left <= 0 && o.id === "brigadeiro" ? "Mais 1 · o primeiro já vai de brinde" : o.desc;
                 return `
               <div class="opt ${n ? "on" : ""}" data-g="${g.id}" data-o="${o.id}">
                 ${o.img ? `<span class="imgw"><img class="o-img" src="${o.img}" alt="" loading="lazy" />${o.ai ? '<span class="ai-mini">IA</span>' : ""}</span>` : ""}
-                <div class="o-txt"><div class="o-name">${esc(o.name)}</div>${o.desc ? `<div class="o-desc">${esc(o.desc)}</div>` : ""}
-                  <div class="o-price">${esc(priceTxt)}${o.old ? ` <s>${brl(o.old)}</s>` : ""}</div></div>
+                <div class="o-txt"><div class="o-name">${esc(o.name)}</div>${oDesc ? `<div class="o-desc">${esc(oDesc)}</div>` : ""}
+                  <div class="o-price">${esc(priceTxt)}${o.old ? ` <s>${brl(o.old)}</s>` : ""}${goalTag}</div></div>
                 ${
                   radio
                     ? `<button class="radio ${n ? "on" : ""}" data-act="toggle" aria-label="Selecionar ${esc(o.name)}"></button>`
                     : n
                     ? `<div class="stepper"><button data-act="dec" aria-label="Menos">−</button><span>${n}</span><button data-act="inc" aria-label="Mais" ${c >= g.max || (o.max && n >= o.max) ? "disabled" : ""}>+</button></div>`
-                    : `<button class="add" data-act="inc" aria-label="Adicionar ${esc(o.name)}" ${c >= g.max ? "disabled" : ""}>+</button>`
+                    : `<button class="add" data-act="inc" aria-label="Adicionar ${esc(o.name)}" ${c >= g.max && !(g.addon && g.max === 1) ? "disabled" : ""}>+</button>`
                 }
               </div>`;
               })
@@ -251,6 +267,13 @@
     const btn = $("#add-btn");
     btn.disabled = !ok;
     btn.innerHTML = ok ? `Adicionar <b>${brl(total)}</b>` : `Escolha as opções · ${brl(Math.max(startPrice(it), it.price + extrasTotal(it)) * state.qty)}`;
+  }
+
+  function refreshSheet() {
+    const sc = $("#sheet .sh-body");
+    const keep = sc.scrollTop;
+    renderSheet();
+    sc.scrollTop = keep;
   }
 
   function setOpt(gid, oid, delta) {
@@ -291,13 +314,14 @@
     visGroups(it).forEach((g) =>
       g.options.forEach((o) => {
         const n = (state.sel[g.id] || {})[o.id] || 0;
-        if (n) opts.push({ g: g.id, name: o.name, n, price: o.price || 0 });
+        if (n) opts.push({ g: g.id, id: o.id, name: o.name, n, price: o.price || 0 });
       })
     );
+    const before = goalBase();
     state.cart.push({ id: it.id, name: it.name, img: it.img, unit: it.price + extrasTotal(it), qty: state.qty, opts, obs: state.obs.trim() });
     closeSheet();
     renderBag(true);
-    toast("Adicionado à sacola");
+    toast(before < D.goal.value && goalBase() >= D.goal.value ? `Adicionado · você ganhou ${D.goal.gift}` : "Adicionado à sacola");
   }
   function closeSheet() {
     $("#sheet").hidden = true;
@@ -306,6 +330,8 @@
 
   /* ---------- sacola ---------- */
   const cartTotal = () => state.cart.reduce((s, l) => s + l.unit * l.qty, 0);
+  const goalSkip = (it) => (D.goal.skip || []).includes(it.cat);
+  const goalBase = () => state.cart.reduce((s, l) => s + (goalSkip(byId[l.id] || {}) ? 0 : l.unit * l.qty), 0);
   const cartCount = () => state.cart.reduce((s, l) => s + l.qty, 0);
   const cartHas = (pred) => state.cart.some((l) => pred(byId[l.id], l));
 
@@ -317,10 +343,10 @@
     $("#bag-n").textContent = `${n} ${n === 1 ? "item" : "itens"}`;
     $("#bag-t").textContent = brl(cartTotal());
     const goal = D.goal;
-    const left = goal.value - cartTotal();
-    $("#bag-goal").innerHTML =
+    const left = goal.value - goalBase();
+    $("#bag-goal").innerHTML = !goalBase() && state.cart.length ? "" :
       left > 0 ? `Faltam <b>${brl(left)}</b> para ganhar ${esc(goal.gift)}` : `<b>Você ganhou ${esc(goal.gift)}</b> neste pedido`;
-    $("#bag-bar-fill").style.width = `${Math.min(100, (cartTotal() / goal.value) * 100)}%`;
+    $("#bag-bar-fill").style.width = `${Math.min(100, (goalBase() / goal.value) * 100)}%`;
     if (bump) {
       bar.classList.remove("bump");
       void bar.offsetWidth;
@@ -330,12 +356,20 @@
 
   function suggestions() {
     const out = [];
-    const hasCat = (cats) => cartHas((it, l) => cats.includes(it.cat) || l.opts.some((o) => /coca|bebida/i.test(o.name) && cats.includes("bebidas")));
+    const inG = (l, ids) => l.opts.some((o) => ids.includes(o.g));
+    const won = goalBase() >= D.goal.value;
     if (!cartHas((it, l) => it.cat === "bebidas" || l.opts.some((o) => /coca/i.test(o.name)))) out.push("coca-lata");
-    if (!cartHas((it) => it.cat === "sobremesas")) out.push(...D.cross.dessert);
-    if (!cartHas((it, l) => it.cat === "molhos" || l.opts.some((o) => /maionese|molho|barbecue|cheddar/i.test(o.name)))) out.push(D.cross.sauce);
-    if (!hasCat(["tiras"])) out.push(D.cross.bites);
-    return [...new Set(out)].map((id) => byId[id]).filter(Boolean).slice(0, 4);
+    if (!cartHas((it, l) => it.cat === "sobremesas" || inG(l, ["sobremesa"]))) out.push(...(won ? D.cross.dessertWon : D.cross.dessert));
+    const hasVerde = cartHas((it, l) => ["the-original", "the-garden", "double-original", "dupla-clube", "a-monstra", "verde-n1"].includes(it.id) || l.opts.some((o) => o.id === "verde"));
+    if (!cartHas((it, l) => it.cat === "molhos" || inG(l, ["molho"]))) out.push(hasVerde ? D.cross.sauceAlt : D.cross.sauce);
+    if (!cartHas((it) => it.id === "chicken-bites" || it.id === "bites-pp")) out.push(D.cross.bites);
+    let list = [...new Set(out)].map((id) => byId[id]).filter(Boolean);
+    // quando faltam até R$ 17,90, o 1º card é o mais barato que fecha a meta e ainda deixa mais margem que o custo do brinde
+    const left = D.goal.value - goalBase();
+    const closes = (it) => startPrice(it) >= left && startPrice(it) - (it.cost || 0) > 2.02;
+    const cl = left > 0 && left <= 17.9 ? list.filter(closes).sort((a, b) => startPrice(a) - startPrice(b))[0] : null;
+    if (cl) list = [cl, ...list.filter((x) => x !== cl)];
+    return list.slice(0, 4).map((it) => ({ it, gift: it === cl }));
   }
 
   function openCart() {
@@ -343,28 +377,37 @@
     const sub = cartTotal();
     const fee = D.store.feeValue;
     const goal = D.goal;
-    const gift = sub >= goal.value;
+    const gb = goalBase();
+    const gift = gb >= goal.value;
     const sug = suggestions();
-    const rescueIdx = state.cart.findIndex((l) => ["burgers", "doubles"].includes(byId[l.id].cat) && l.opts.some((o) => o.g === "combo" && o.name === "Só o lanche"));
+    const duplaIdx = state.cart.findIndex((l) => l.id === "dupla-clube" && !l.opts.some((o) => o.g === "completar"));
+    const rescueIdx = duplaIdx >= 0 ? -1 : state.cart.findIndex((l) => ["burgers", "doubles"].includes(byId[l.id].cat) && l.opts.some((o) => o.g === "combo" && (o.id === "solo" || o.name === "Só o lanche")));
     box.innerHTML = `
       <div class="sh-pad">
         <h3 class="sh-name">Sua sacola</h3>
         <div class="c-goal ${gift ? "won" : ""}"><div class="c-goal-t">${
-          gift ? `Pedido acima de ${brl(goal.value)}: ${esc(goal.gift)} vai junto, por nossa conta.` : `Faltam <b>${brl(goal.value - sub)}</b> para ganhar ${esc(goal.gift)}`
-        }</div><div class="c-goal-bar"><i style="width:${Math.min(100, (sub / goal.value) * 100)}%"></i></div></div>
+          gift ? `Pedido acima de ${brl(goal.value)}: ${esc(goal.gift)} vai junto, por nossa conta.` : `Faltam <b>${brl(goal.value - gb)}</b> para ganhar ${esc(goal.gift)}${gb < sub ? " <small>(combos Pra Dois e Compartilhar não contam)</small>" : ""}`
+        }</div><div class="c-goal-bar"><i style="width:${Math.min(100, (gb / goal.value) * 100)}%"></i></div></div>
         <ul class="lines">${state.cart
           .map(
             (l, i) => `
           <li class="line"><span class="imgw"><img src="${l.img}" alt="" />${(byId[l.id] || {}).ai ? '<span class="ai-mini">IA</span>' : ""}</span><div class="l-txt"><div class="l-name">${esc(l.name)}</div>
-            ${l.opts.length ? `<div class="l-opts">${l.opts.map((o) => `${o.n > 1 ? o.n + "× " : ""}${esc(o.name)}`).join(" · ")}</div>` : ""}
+            ${(() => {
+              const mods = l.opts.filter((o) => o.g !== "sobremesa");
+              const doces = l.opts.filter((o) => o.g === "sobremesa");
+              const fmt = (o) => `${o.n * (o.g === "sobremesa" ? l.qty : 1) > 1 ? o.n * (o.g === "sobremesa" ? l.qty : 1) + "× " : ""}${esc(o.name)}`;
+              return (mods.length ? `<div class="l-opts">${mods.map(fmt).join(" · ")}</div>` : "") + (doces.length ? `<div class="l-opts l-dessert">+ Sobremesa: ${doces.map(fmt).join(" · ")}</div>` : "");
+            })()}
             ${l.obs ? `<div class="l-opts">Obs.: ${esc(l.obs)}</div>` : ""}
             <div class="l-price">${brl(l.unit * l.qty)}</div></div>
             <div class="stepper sm"><button data-line="${i}" data-d="-1" aria-label="Menos">−</button><span>${l.qty}</span><button data-line="${i}" data-d="1" aria-label="Mais">+</button></div></li>`
           )
-          .join("")}</ul>
+          .join("")}${gift ? `<li class="line gift"><span class="imgw"><img src="img/hd/brigadeiro.jpg" alt="" /></span><div class="l-txt"><div class="l-name">${esc(goal.gift)} · brinde</div><div class="l-price">R$ 0,00</div></div></li>` : ""}</ul>
         ${
-          rescueIdx >= 0
-            ? `<button class="rescue" data-rescue="${rescueIdx}"><img src="img/novo/thumb-batata-coca.jpg" alt="" /><span><b>Complete o ${esc(state.cart[rescueIdx].name)} como combo</b><br>+ Batata Frita Crocante Individual + Coca lata por +R$ 16,00 · economize R$ 5,80</span><i>+</i></button>`
+          duplaIdx >= 0
+            ? (() => { const l = state.cart[duplaIdx]; return `<div class="rescue"><img src="img/hd/date-night.jpg" alt="" /><span><b>Complete a dupla: vira Date Night</b><br>+ Batata Frita Crocante Super pra dividir + 2 Cocas lata por +${brl(35 * l.qty)} · economize ${brl(19.7 * l.qty)}</span><div class="rs-btns"><button data-rescue-dupla="${duplaIdx}" data-drink="coca">Date Night com 2 Coca-Cola · +${brl(35 * l.qty)}</button><button data-rescue-dupla="${duplaIdx}" data-drink="mix">Com 1 Coca e 1 sem açúcar · +${brl(35 * l.qty)}</button></div></div>`; })()
+            : rescueIdx >= 0
+            ? (() => { const l = state.cart[rescueIdx]; return `<div class="rescue"><img src="img/novo/thumb-batata-coca.jpg" alt="" /><span><b>Complete o ${esc(l.name)} como combo</b><br>+ Batata Frita Crocante Individual + Coca lata por +${brl(16 * l.qty)}${l.qty > 1 ? ` (${l.qty} combos)` : ""} · economize ${brl(5.8 * l.qty)}</span><div class="rs-btns"><button data-rescue="${rescueIdx}" data-drink="coca">Combo com Coca-Cola · +${brl(16 * l.qty)}</button><button data-rescue="${rescueIdx}" data-drink="zero">Combo com Coca sem açúcar · +${brl(16 * l.qty)}</button></div></div>`; })()
             : ""
         }
         ${
@@ -372,7 +415,7 @@
             ? `<div class="sec-h small"><h4>Peça também</h4>${whyPin("carrinho")}</div>
         <div class="hscroll sug">${sug
           .map(
-            (it) => `<button class="scard" data-quick="${it.id}"><span class="imgw sc"><img src="${it.img}" alt="" loading="lazy" />${it.ai ? '<span class="ai-tag">ilustrativa</span>' : ""}</span><div class="s-name">${esc(it.name)}</div><div class="s-price">${brl(startPrice(it))}</div><span class="s-add">+ adicionar</span></button>`
+            ({ it, gift: g }) => `<button class="scard" data-quick="${it.id}"><span class="imgw sc"><img src="${it.img}" alt="" loading="lazy" />${it.ai ? '<span class="ai-tag">ilustrativa</span>' : ""}</span><div class="s-name">${esc(it.name)}</div><div class="s-price">${brl(startPrice(it))}</div>${g ? '<span class="s-goal">libera o brinde</span>' : ""}<span class="s-add">+ adicionar</span></button>`
           )
           .join("")}</div>`
             : ""
@@ -396,13 +439,14 @@
     const opts = [];
     req.forEach((g) => Object.entries(g.preset || {}).forEach(([oid, n]) => {
       const o = g.options.find((x) => x.id === oid);
-      opts.push({ g: g.id, name: o.name, n, price: o.price || 0 });
+      opts.push({ g: g.id, id: oid, name: o.name, n, price: o.price || 0 });
     }));
     const unit = it.price + opts.reduce((s, o) => s + o.price * o.n, 0);
+    const before = goalBase();
     state.cart.push({ id: it.id, name: it.name, img: it.img, unit, qty: 1, opts, obs: "" });
     renderBag(true);
     openCart();
-    toast(`${it.name} adicionado`);
+    toast(before < D.goal.value && goalBase() >= D.goal.value ? `${it.name} adicionado · você ganhou ${D.goal.gift}` : `${it.name} adicionado`);
   }
 
   function checkout() {
@@ -467,11 +511,11 @@
       if (t.closest("[data-close-sheet]")) return closeSheet();
       if (t.closest("#qty-m")) {
         state.qty = Math.max(1, state.qty - 1);
-        return updateSheetFooter();
+        return refreshSheet();
       }
       if (t.closest("#qty-p")) {
         state.qty += 1;
-        return updateSheetFooter();
+        return refreshSheet();
       }
       if (t.closest("#add-btn")) return addToCart();
       if (t.closest("#bag")) return openCart();
@@ -492,11 +536,24 @@
         }
         return openCart();
       }
+      const rd = t.closest("[data-rescue-dupla]");
+      if (rd) {
+        const l = state.cart[+rd.dataset.rescueDupla];
+        l.opts = l.opts.filter((o) => o.g !== "completar" && o.g !== "bebida");
+        l.opts.push({ g: "completar", id: "dn", name: "+ Batata Frita Crocante Super pra dividir + 2 Cocas lata", n: 1, price: 35 });
+        if (rd.dataset.drink === "mix") l.opts.push({ g: "bebida", id: "coca", name: "Coca-Cola lata", n: 1, price: 0 }, { g: "bebida", id: "zero", name: "Coca-Cola sem açúcar lata", n: 1, price: 0 });
+        else l.opts.push({ g: "bebida", id: "coca", name: "Coca-Cola lata", n: 2, price: 0 });
+        l.unit += 35;
+        renderBag(true);
+        toast("Virou Date Night");
+        return openCart();
+      }
       const rs = t.closest("[data-rescue]");
       if (rs) {
         const l = state.cart[+rs.dataset.rescue];
-        l.opts = l.opts.filter((o) => o.name !== "Só o burger");
-        l.opts = l.opts.filter((o) => o.g !== "combo"); l.opts.unshift({ g: "combo", name: "Combo: + Batata Frita Crocante Individual + Coca lata", n: 1, price: 16 });
+        const zero = rs.dataset.drink === "zero";
+        l.opts = l.opts.filter((o) => o.g !== "combo" && o.g !== "bebida");
+        l.opts.unshift({ g: "combo", id: "combo", name: "Combo: + Batata Frita Crocante Individual + Coca lata", n: 1, price: 16 }, { g: "bebida", id: zero ? "zero" : "coca", name: zero ? "Coca-Cola sem açúcar lata" : "Coca-Cola lata", n: 1, price: 0 });
         l.unit += 16;
         renderBag(true);
         toast("Virou combo");

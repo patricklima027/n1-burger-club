@@ -407,9 +407,9 @@
           .join("")}${gift ? `<li class="line gift"><span class="imgw"><img src="img/hd/brigadeiro.jpg" alt="" /></span><div class="l-txt"><div class="l-name">${esc(goal.gift)} · brinde</div><div class="l-price">R$ 0,00</div></div></li>` : ""}</ul>
         ${
           duplaIdx >= 0
-            ? (() => { const l = state.cart[duplaIdx]; return `<div class="rescue"><img src="img/hd/date-night.jpg" alt="" /><span><b>Complete a dupla: vira Date Night</b><br>+ Batata Frita Crocante Super pra dividir + 2 Cocas lata por +${brl(35 * l.qty)} · economize ${brl(19.7 * l.qty)}</span><div class="rs-btns"><button data-rescue-dupla="${duplaIdx}" data-drink="coca">Date Night com 2 Coca-Cola · +${brl(35 * l.qty)}</button><button data-rescue-dupla="${duplaIdx}" data-drink="mix">Com 1 Coca e 1 sem açúcar · +${brl(35 * l.qty)}</button></div></div>`; })()
+            ? (() => { const l = state.cart[duplaIdx]; return `<div class="rescue"><img src="img/hd/date-night.jpg" alt="" /><span><b>Complete a dupla: vira Date Night</b><br>+ Batata Frita Crocante Super pra dividir + 2 Cocas lata por +${brl(42 * l.qty)} · economize ${brl(16.7 * l.qty)}</span><div class="rs-btns"><button data-rescue-dupla="${duplaIdx}" data-drink="coca">Date Night com 2 Coca-Cola · +${brl(42 * l.qty)}</button><button data-rescue-dupla="${duplaIdx}" data-drink="mix">Com 1 Coca e 1 sem açúcar · +${brl(42 * l.qty)}</button></div></div>`; })()
             : rescueIdx >= 0
-            ? (() => { const l = state.cart[rescueIdx]; return `<div class="rescue"><img src="img/novo/thumb-batata-coca.jpg" alt="" /><span><b>Complete o ${esc(l.name)} como combo</b><br>+ Batata Frita Crocante Individual + Coca lata por +${brl(16 * l.qty)}${l.qty > 1 ? ` (${l.qty} combos)` : ""} · economize ${brl(5.8 * l.qty)}</span><div class="rs-btns"><button data-rescue="${rescueIdx}" data-drink="coca">Combo com Coca-Cola · +${brl(16 * l.qty)}</button><button data-rescue="${rescueIdx}" data-drink="zero">Combo com Coca sem açúcar · +${brl(16 * l.qty)}</button></div></div>`; })()
+            ? (() => { const l = state.cart[rescueIdx]; return `<div class="rescue"><img src="img/novo/thumb-batata-coca.jpg" alt="" /><span><b>Complete o ${esc(l.name)} como combo</b><br>+ Batata Frita Crocante Individual + Coca lata por +${brl(18 * l.qty)}${l.qty > 1 ? ` (${l.qty} combos)` : ""} · economize ${brl(5.8 * l.qty)}</span><div class="rs-btns"><button data-rescue="${rescueIdx}" data-drink="coca">Combo com Coca-Cola · +${brl(18 * l.qty)}</button><button data-rescue="${rescueIdx}" data-drink="zero">Combo com Coca sem açúcar · +${brl(18 * l.qty)}</button></div></div>`; })()
             : ""
         }
         ${
@@ -422,7 +422,7 @@
           .join("")}</div>`
             : ""
         }
-        <dl class="totals"><div><dt>Subtotal</dt><dd>${brl(sub)}</dd></div><div><dt>Taxa de entrega <small>(exemplo)</small></dt><dd>${brl(fee)}</dd></div>
+        <dl class="totals"><div><dt>Subtotal</dt><dd>${brl(sub)}</dd></div><div><dt>Taxa de entrega</dt><dd>${fee ? brl(fee) : "Grátis"}</dd></div>
           <div class="grand"><dt>Total</dt><dd>${brl(sub + fee)}</dd></div></dl>
       </div>`;
     $("#cart").hidden = false;
@@ -542,10 +542,10 @@
       if (rd) {
         const l = state.cart[+rd.dataset.rescueDupla];
         l.opts = l.opts.filter((o) => o.g !== "completar" && o.g !== "bebida");
-        l.opts.push({ g: "completar", id: "dn", name: "+ Batata Frita Crocante Super pra dividir + 2 Cocas lata", n: 1, price: 35 });
+        l.opts.push({ g: "completar", id: "dn", name: "+ Batata Frita Crocante Super pra dividir + 2 Cocas lata", n: 1, price: 42 });
         if (rd.dataset.drink === "mix") l.opts.push({ g: "bebida", id: "coca", name: "Coca-Cola lata", n: 1, price: 0 }, { g: "bebida", id: "zero", name: "Coca-Cola sem açúcar lata", n: 1, price: 0 });
         else l.opts.push({ g: "bebida", id: "coca", name: "Coca-Cola lata", n: 2, price: 0 });
-        l.unit += 35;
+        l.unit += 42;
         renderBag(true);
         toast("Virou Date Night");
         return openCart();
@@ -555,8 +555,8 @@
         const l = state.cart[+rs.dataset.rescue];
         const zero = rs.dataset.drink === "zero";
         l.opts = l.opts.filter((o) => o.g !== "combo" && o.g !== "bebida");
-        l.opts.unshift({ g: "combo", id: "combo", name: "Combo: + Batata Frita Crocante Individual + Coca lata", n: 1, price: 16 }, { g: "bebida", id: zero ? "zero" : "coca", name: zero ? "Coca-Cola sem açúcar lata" : "Coca-Cola lata", n: 1, price: 0 });
-        l.unit += 16;
+        l.opts.unshift({ g: "combo", id: "combo", name: "Combo: + Batata Frita Crocante Individual + Coca lata", n: 1, price: 18 }, { g: "bebida", id: zero ? "zero" : "coca", name: zero ? "Coca-Cola sem açúcar lata" : "Coca-Cola lata", n: 1, price: 0 });
+        l.unit += 18;
         renderBag(true);
         toast("Virou combo");
         return openCart();

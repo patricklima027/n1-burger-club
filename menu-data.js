@@ -1,6 +1,6 @@
 /* Novo cardápio — N1 Burger Club (RE:MENU, 29/09/2026)
    Base: cardápio final do processo com júri (pack/50-cardapio-final.json) + ajustes finais de revisão:
-   combo com regra única (+R$ 16 em qualquer burger), descrições fiéis à ficha técnica, selos só com base.
+   combo com regra única (+R$ 18 em qualquer burger), descrições fiéis à ficha técnica, selos só com base.
    Custos: planilha "CMV 2026" (abas Precificação N1, Frango & Burguers, Pré-operação), com saco kraft. */
 (function () {
   const H = "img/hd/";
@@ -9,12 +9,12 @@
   const P_DUPLA = 54.9; // Dupla do Clube (2 The Original)
 
   /* ---------- grupos reutilizáveis ---------- */
-  const COMBO = 16; // acréscimo único do combo (R3 · Regra 1)
+  const COMBO = 18; // acréscimo único do combo (R3 · Regra 1)
   const gCombo = () => ({
     id: "combo", title: "Vira Combo N1?", hint: "Escolha 1 · o combo sai R$ 5,80 mais barato que separado", min: 1, max: 1, highlight: true, why: "combo-step",
     options: [
-      { id: "combo", name: "Combo: + Batata Frita Crocante Individual + Coca lata", price: COMBO, img: N + "thumb-batata-coca.jpg", desc: "Separado sairia R$ 21,80 · economize R$ 5,80" },
-      { id: "turbo", name: "Combo turbo: + Batata Cheddar e Bacon Individual + Coca lata", price: 24, img: H + "batata-cheddar-e-bacon.jpg", desc: "Separado sairia R$ 29,80 · economize R$ 5,80" },
+      { id: "combo", name: "Combo: + Batata Frita Crocante Individual + Coca lata", price: COMBO, img: N + "thumb-batata-coca.jpg", desc: "Separado sairia R$ 23,80 · economize R$ 5,80" },
+      { id: "turbo", name: "Combo turbo: + Batata Cheddar e Bacon Individual + Coca lata", price: 26, img: H + "batata-cheddar-e-bacon.jpg", desc: "Separado sairia R$ 31,80 · economize R$ 5,80" },
       { id: "solo", name: "Só o lanche" },
     ],
   });
@@ -84,9 +84,9 @@
     ["smoke", "The Smoke", 0, H + "chicken-bbq.jpg"],
     ["crunch", "The Crunch", 1, N + "the-crunch.jpg", true],
     ["garden", "The Garden", 2, H + "verde.jpg"],
-    ["garlic", "The Garlic", 4, H + "garlic-bacon.jpg"],
-    ["onion", "The Onion Storm", 4, H + "onion.jpg"],
-    ["bbc", "The B.B.C.", 4, H + "o-b-b-c.jpg"],
+    ["garlic", "The Garlic", 6.5, H + "garlic-bacon.jpg"],
+    ["onion", "The Onion Storm", 6.5, H + "onion.jpg"],
+    ["bbc", "The B.B.C.", 6.5, H + "o-b-b-c.jpg"],
   ];
   const pick = (n) => ({
     id: "burgers", title: n > 1 ? `Escolha os ${n} burgers` : "Escolha o burger", hint: n > 1 ? `Escolha ${n} · pode repetir` : "Escolha 1", min: n, max: n,
@@ -101,22 +101,22 @@
     { id: "dupla-clube", cat: "pra-dois", name: "Dupla do Clube", img: N + "dupla-clube.jpg", ai: true, price: P_DUPLA, old: 63.8, badge: { text: "Leve 2", tone: "pink" }, serves: "2 burgers", why: "dupla",
       desc: "2 The Original: 2 tiras de sassami de frango crocante e Molho Verde da Casa no brioche. Sai R$ 27,45 cada.",
       groups: [gMolhoIncluso(1), { id: "completar", title: "Quer completar a dupla?", hint: "Opcional · vira um Date Night", min: 0, max: 1, addon: true, why: "dupla",
-        options: [{ id: "sb", name: "+ Batata Frita Crocante Super pra dividir", price: 18, img: H + "batata-frita.jpg", desc: "Fica R$ 72,90 · separado sairia R$ 34,90" },
-          { id: "dn", name: "+ Batata Frita Crocante Super pra dividir + 2 Cocas lata", price: +(89.9 - P_DUPLA).toFixed(2), img: H + "date-night.jpg", desc: "Vira Date Night, R$ 89,90 · separado sairia R$ 54,70" }] },
+        options: [{ id: "sb", name: "+ Batata Frita Crocante Super pra dividir", price: 24, img: H + "batata-frita.jpg", desc: "Fica R$ 78,90 · separado sairia R$ 34,90" },
+          { id: "dn", name: "+ Batata Frita Crocante Super pra dividir + 2 Cocas lata", price: +(96.9 - P_DUPLA).toFixed(2), img: H + "date-night.jpg", desc: "Vira Date Night, R$ 96,90 · separado sairia R$ 58,70" }] },
         { ...duasCocas, showIf: { g: "completar", any: ["dn"] } }, gSobremesaDividir(2)],
       role: "Isca de conversão", cost: 15.0 },
-    { id: "date-night", cat: "pra-dois", name: "Date Night", img: H + "date-night.jpg", price: 89.9, old: 114.5, fromLabel: true, serves: "Serve 2 pessoas", tag: "Sextou pra dois",
-      desc: "2 burgers à sua escolha + Batata Frita Crocante Super pra dividir + 2 Cocas lata. A partir de R$ 44,95 por pessoa, sem briga sobre o que pedir.",
-      groups: [pick(2), gLado("Acompanhamento pra dividir", LADO_SUPER), duasCocas, gMolhoIncluso(1), gSobremesaDividir(2)],
-      role: "Estrela do ticket", cost: 30.34 },
+    { id: "date-night", cat: "pra-dois", name: "Date Night", img: H + "date-night.jpg", price: 96.9, old: 118.5, fromLabel: true, serves: "Serve 2 pessoas", tag: "Sextou pra dois",
+      desc: "2 burgers à sua escolha + Batata Frita Crocante Super pra dividir + 2 Cocas lata. A partir de R$ 48,45 por pessoa, sem briga sobre o que pedir.",
+      groups: [pick(2), gLado("Acompanhamento pra dividir", LADO_SUPER), duasCocas, { ...gMolho(), title: "Molho pra dividir" }, gSobremesaDividir(2)],
+      role: "Estrela do ticket", cost: 28.64 },
 
     /* ===== Pra Compartilhar ===== */
-    { id: "a-monstra", cat: "pra-compartilhar", name: "Os Monstros", img: H + "a-monstra.jpg", price: 219.9, old: 255.4, badge: { text: "Fome grande", tone: "red" }, serves: "Serve 4 pessoas com folga",
+    { id: "a-monstra", cat: "pra-compartilhar", name: "Os Monstros", img: H + "a-monstra.jpg", price: 229.9, old: 259.4, badge: { text: "Fome grande", tone: "red" }, serves: "Serve 4 pessoas com folga",
       desc: "4 Double Original + Batata Frita Crocante Mega + Coca grande + 2 molhos da casa. Pede com responsabilidade.",
       groups: [gLado("Acompanhamento pra galera", LADO_MEGA), gMolhoIncluso(2), cocaGrande, gSobremesaDividir(4)], role: "Âncora de teto", cost: 67.94 },
-    { id: "o-bonde", cat: "pra-compartilhar", name: "O Bonde", img: A + "o-bonde.jpg", price: 169.9, old: 203.4, fromLabel: true, serves: "Serve 3 a 4 pessoas",
-      desc: "4 burgers à escolha + Batata Frita Crocante Mega + Coca grande. Para 4, a partir de R$ 42,48 por pessoa: de 7% a 11% abaixo de 4 combos.",
-      groups: [pick(4), gLado("Acompanhamento pra galera", LADO_MEGA), cocaGrande, { ...gMolho(), title: "Molho pra galera" }, gSobremesaDividir(4)], role: "Volume (grupo)", cost: 51.42 },
+    { id: "o-bonde", cat: "pra-compartilhar", name: "O Bonde", img: A + "o-bonde.jpg", price: 199.9, old: 203.4, badge: { text: "2 molhos inclusos", tone: "yellow" }, fromLabel: true, serves: "Serve 3 a 4 pessoas",
+      desc: "4 burgers à escolha + Batata Frita Crocante Mega + Coca grande + 2 molhos da casa. Para 4, a partir de R$ 49,98 por pessoa.",
+      groups: [pick(4), gLado("Acompanhamento pra galera", LADO_MEGA), gMolhoIncluso(2), cocaGrande, gSobremesaDividir(4)], role: "Volume (grupo)", cost: 54.82 },
 
     /* ===== Chicken Burgers ===== */
     { id: "the-garlic", cat: "burgers", name: "The Garlic", img: H + "garlic-bacon.jpg", price: 38.9,
@@ -136,10 +136,10 @@
       groups: burger([gDouble(10, "Fica com 4 tiras de sassami · R$ 43,90")]), role: "Burro de carga", cost: 7.45 },
     { id: "the-original", cat: "burgers", name: "The Original", img: H + "o-original.jpg", price: 31.9, tag: "O clássico",
       desc: "2 tiras de sassami de frango crocante e Molho Verde da Casa no brioche. Simples do jeito certo.",
-      groups: burger([gDouble(11, "Mesmo preço e mesma receita do Double Original: R$ 42,90", "Vira Double Original: 4 tiras, receita do Double pronto")]), role: "Base de combo", cost: 7.02 },
+      groups: burger([gDouble(12, "Mesmo preço e mesma receita do Double Original: R$ 43,90", "Vira Double Original: 4 tiras, receita do Double pronto")]), role: "Base de combo", cost: 7.02 },
     { id: "the-smoke", cat: "burgers", name: "The Smoke", img: H + "chicken-bbq.jpg", price: 29.9,
       desc: "2 tiras de sassami de frango crocante com barbecue defumado, no brioche.",
-      groups: burger([gDouble(10, "Mesmo preço e mesma receita do Double Smoke: R$ 39,90", "Vira Double Smoke: 4 tiras, receita do Double pronto")]), role: "Entrada de preço", cost: 6.75 },
+      groups: burger([gDouble(12, "Mesmo preço e mesma receita do Double Smoke: R$ 41,90", "Vira Double Smoke: 4 tiras, receita do Double pronto")]), role: "Entrada de preço", cost: 6.75 },
 
     /* ===== Doubles & Triple ===== */
     { id: "double-bbc", cat: "doubles", name: "Double B.B.C.", img: H + "double-b-b-c.jpg", price: 49.9, tag: "Dose dupla",
@@ -151,10 +151,10 @@
     { id: "double-onion-storm", cat: "doubles", name: "Double Onion Storm", img: H + "double-onion.jpg", price: 48.9,
       desc: "4 tiras de sassami de frango, anéis de cebola empanados e maionese de bacon em dose dupla.",
       groups: burger(), role: "Quebra-cabeça", cost: 12.76 },
-    { id: "double-original", cat: "doubles", name: "Double Original", img: H + "double-original.jpg", price: 42.9,
+    { id: "double-original", cat: "doubles", name: "Double Original", img: H + "double-original.jpg", price: 43.9,
       desc: "4 tiras de sassami de frango crocante e Molho Verde da Casa no brioche. O clássico em dose dupla.",
       groups: burger(), role: "Âncora do single", cost: 10.3 },
-    { id: "double-smoke", cat: "doubles", name: "Double Smoke", img: H + "double-b-b-q.jpg", price: 39.9, why: "double",
+    { id: "double-smoke", cat: "doubles", name: "Double Smoke", img: H + "double-b-b-q.jpg", price: 41.9, why: "double",
       desc: "4 tiras de sassami de frango crocante com barbecue defumado, no brioche.",
       groups: burger(), role: "Entrada do Double (margem abaixo da média)", cost: 9.74 },
     { id: "triple-bbc", cat: "doubles", name: "Triple B.B.C.", img: N + "triple-bbc.jpg", ai: true, price: 62.9, badge: { text: "Novo", tone: "red" }, why: "triple",
@@ -203,7 +203,7 @@
     { id: "mini-churros-ind", cat: "sobremesas", hidden: true, name: "Mini Churros Individual", img: H + "mini-churros.jpg", price: 11.9, desc: "Pra mergulhar no Brigadeiro de brinde.", role: "Impulso final", cost: 2.63 },
 
     /* ===== Bebidas ===== */
-    { id: "coca-lata", cat: "bebidas", name: "Coca-Cola lata", img: H + "coca-lata-normal.jpg", price: 9.9, why: "bebidas",
+    { id: "coca-lata", cat: "bebidas", name: "Coca-Cola lata", img: H + "coca-lata-normal.jpg", price: 11.9, why: "bebidas",
       desc: "Normal ou sem açúcar, 310 ml ou 350 ml conforme a região.",
       groups: [{ id: "tipo", title: "Normal ou sem açúcar?", min: 1, max: 1, preset: { normal: 1 }, options: [{ id: "normal", name: "Normal", img: H + "coca-lata-normal.jpg" }, { id: "zero", name: "Sem açúcar", img: H + "coca-lata-zero.jpg" }] }],
       role: "Ancoragem p/ combo", cost: 3.64 },
@@ -222,7 +222,7 @@
     add(it.cat, it.name, it.price, it.cost, it.role, /Novo/.test(it.badge?.text || "") || it.id === "dupla-clube", it.est);
   });
   items.filter((i) => ["burgers", "doubles"].includes(i.cat)).forEach((it) =>
-    add("combo", `Combo ${it.name}`, it.price + COMBO, +(it.cost + OVERHEAD).toFixed(2), "Combo via modal (+R$ 16)", false, it.est));
+    add("combo", `Combo ${it.name}`, it.price + COMBO, +(it.cost + OVERHEAD).toFixed(2), "Combo via modal (+R$ 18)", false, it.est));
   [
     ["pra-dois", "Dupla + Batata Super (via modal)", 72.9, 23.7, "Degrau do casal (R$ 60 a R$ 85)", true],
     ["doubles", "Double The Garden (via modal)", 43.9, 10.73, "Vira Double no modal", true, true], ["doubles", "Double The Crunch (via modal)", 42.9, 10.59, "Vira Double no modal", true, true],
@@ -240,7 +240,7 @@
   window.N1 = {
     store: {
       name: "N1 Burger Club", tagline: "Chicken burgers · Lanches", cover: N + "cover.jpg", logo: "img/brand/n1-badge.svg",
-      rating: "4,8 (exemplo)", eta: "30–45 min", fee: "Entrega R$ 6,99", feeValue: 6.99,
+      rating: "4,8 (exemplo)", eta: "25–35 min", fee: "Entrega grátis", feeValue: 0,
       club: "5 to Free: 1 de 6 já é seu. A cada 5 pedidos, um The Original por nossa conta.",
     },
     goal: { value: 74.9, gift: "1 Brigadeiro do Clube", skip: ["pra-dois", "pra-compartilhar"] },
@@ -249,7 +249,7 @@
     categories: [
       { id: "pra-dois", name: "Pra Dois", sub: "O formato nº 1 da rede, agora no clube: 2 burgers a partir de R$ 54,90." },
       { id: "pra-compartilhar", name: "Pra Compartilhar", short: "Compartilhar", sub: "De 3 a 4 pessoas. Os Monstros já vêm com 2 molhos da casa." },
-      { id: "burgers", name: "Chicken Burgers", short: "Burgers", sub: "2 tiras de sassami empanadas na hora, no brioche. Qualquer burger vira combo por +R$ 16: combo a partir de R$ 45,90." },
+      { id: "burgers", name: "Chicken Burgers", short: "Burgers", sub: "2 tiras de sassami empanadas na hora, no brioche. Qualquer burger vira combo por +R$ 18: combo a partir de R$ 47,90." },
       { id: "doubles", name: "Doubles & Triple", short: "Doubles", sub: "O mesmo clássico, em dose dupla ou tripla." },
       { id: "acomp", name: "Acompanhamentos", short: "Acompanhamentos" },
       { id: "molhos", name: "Molhos da Casa", short: "Molhos", sub: "Feitos na cozinha. O Verde da Casa é a nossa assinatura." },
@@ -263,13 +263,13 @@
         text: "Até 5 itens, só o que puxa pedido: o carro-chefe, a porta de entrada, o 2º burger de maior margem, que ainda vende pouco (The Onion Storm, R$ 30,64), o Date Night e a âncora de teto. O topo é a zona que mais recebe olhar, e é lá que vão os itens de margem alta. Destacar os mais pedidos aumentou a demanda deles em <b>13% a 20%</b> num experimento de campo, e a seção “Mais Vendidos” do iFood teve <b>+44%</b> nas vendas originadas nela. O carrossel é recalculado a cada 30 dias com dado real do clube.",
         ref: "Traster, Foundations of Menu Planning, cap. 10 e 11 · Cai, Chen & Fang (AER, 2009) · blog iFood Parceiros" },
       "pra-dois": { title: "Pra Dois: o formato que a rede já prova", tags: ["Isca de conversão", "Formato nº 1 da rede"],
-        text: "O formato “dois burgers com desconto” foi o item com mais pedidos da rede (marca-mãe) em 2025: <b>79.661</b>, quase o dobro do 2º colocado (Combo M, 39.985). O clube nunca teve esse formato: hoje, os 3 combos pra 2 começam em R$ 96,90. A Dupla do Clube sai a <b>R$ 54,90</b> (R$ 27,45 cada) e sobe em degraus no próprio modal: <b>+R$ 18</b> com Batata Super (R$ 72,90, dentro do orçamento do casal, de R$ 60 a R$ 85) ou <b>+R$ 35</b> vira Date Night. Date Night cai de R$ 96,90 para <b>R$ 89,90</b>, o topo da faixa de combos pra 2 no mercado. A Dupla B.B.C. sai: com 2 The B.B.C., o Date Night fica em R$ 97,90, R$ 12 a menos que ela pelo mesmo pedido. Preço “separado” sem contar o molho incluso.",
+        text: "O formato “dois burgers com desconto” foi o item com mais pedidos da rede (marca-mãe) em 2025: <b>79.661</b>, quase o dobro do 2º colocado (Combo M, 39.985). O clube nunca teve esse formato: hoje, os 3 combos pra 2 começam em R$ 96,90. A Dupla do Clube sai a <b>R$ 54,90</b> (R$ 27,45 cada) e sobe em degraus no próprio modal: <b>+R$ 24</b> com Batata Super (R$ 78,90, dentro do orçamento do casal, de R$ 60 a R$ 85) ou <b>+R$ 42</b> vira Date Night. Cada degrau tem o preço pelo CMV-alvo: 27,3%, 30,0% e 29,6%. O Date Night fica no preço de hoje, <b>R$ 96,90</b>, agora com os burgers à escolha; com 2 The B.B.C. ele sai R$ 109,90, o preço da A Dupla B.B.C. de hoje, que deixa de ser um item à parte.",
         ref: "Itens Vendidos 2025 (rede, marca N1 Chicken) · benchmark Brasil · Nagle (conta de empate)" },
       dupla: { title: "Dupla do Clube: por que R$ 54,90", tags: ["Conta de empate", "CMV 27,3%"],
         text: "Separados, 2 The Original custam R$ 63,80. A R$ 54,90 o cliente economiza <b>R$ 8,90 (14%)</b>. Para empatar a margem total, basta vender <b>25% mais pares</b>: a margem cai de R$ 49,76 (2 avulsos) para R$ 39,90 (a dupla, já com o molho incluso).",
         ref: "Nagle, Müller & Gruyaert (break-even de desconto) · planilha CMV 2026" },
       "pra-compartilhar": { title: "Compartilhar: dentro do orçamento da galera", tags: ["Volume (grupo)", "Âncora de teto"],
-        text: "Persona Galera de Sábado (25% do público do plano, orçamento de R$ 130 a R$ 170). O Bonde cai de R$ 199,90 para <b>R$ 169,90</b>, o teto do orçamento. A R$ 199,90 ele fica acima do que a galera gasta, com CMV de 25,7%, abaixo da meta de 29% a 30% do plano. Agora sai <b>até 11% abaixo de 4 combos</b>, com CMV de <b>30,3%</b>. A margem por pedido cai de R$ 148,48 para R$ 118,48: é uma aposta em volume, que empata com +25,3% de pedidos e é medida em 4 + 4 semanas. O molho vira escolha paga (R$ 6,90), e Os Monstros (R$ 219,90, com 2 molhos) ficam como âncora de teto. O preço “separado” é a soma com o burger mais barato.",
+        text: "Persona Galera de Sábado (25% do público do plano, orçamento de R$ 130 a R$ 170). O Bonde fica no preço de hoje, <b>R$ 199,90</b>, e passa a levar <b>2 molhos da casa</b>: mais valor no mesmo preço, com CMV de 27,4%, dentro do limite do plano (até 30%). No modal, a galera ainda escolhe os 4 burgers e pode fechar com sobremesa pra dividir. Os Monstros (4 Double Original, R$ 229,90) têm o preço pelo CMV-alvo: custo de R$ 67,94, CMV de 29,6%, e ficam como âncora de teto. O preço “separado” é a soma com o burger mais barato.",
         ref: "Plano de marca §5.3 · Slim Chickens · planilha CMV" },
       burgers: { title: "A ordem é de propósito", tags: ["Kasavana & Smith", "Posição na lista"],
         text: "The Garlic abre a lista: é o único item <b>Estrela</b> da matriz (popular na rede e com margem em R$ acima da média). Itens no início e no fim de uma lista chegam a ser <b>2x mais escolhidos</b>. No fim, a entrada de preço: The Smoke (R$ 29,90). Todo burger tem no mínimo 2 tiras de sassami. Todos com nome oficial do plano da marca: The Original, The B.B.C., The Garden.",
@@ -281,16 +281,16 @@
         text: "2 tiras de sassami crocante, molho cheddar e picles: o cheddar do The B.B.C. e o picles do The Garden, que já estão na cozinha. Custo de <b>R$ 7,31</b> e CMV de 22%. Entra no lugar do The Spicy, que depende de um molho de pimenta que não está na lista de compras.",
         ref: "Planilha CMV (fichas técnicas) · plano de marca §6.3" },
       doubles: { title: "Escada Single → Double → Triple", tags: ["Good-better-best", "Dígito da esquerda"],
-        text: "Todos os 7 burgers viram Double no próprio modal por <b>+R$ 10 ou +R$ 11</b>: nos 5 com Double pronto, pelo mesmo preço dele; no The Garden e no The Crunch, por +R$ 10 (custo da 2ª camada estimado), e o Double B.B.C. vira Triple por <b>+R$ 13</b>. O Double Smoke cai de R$ 41,90 para <b>R$ 39,90</b>: o efeito do dígito da esquerda só aparece quando o 1º dígito muda. O Triple existe para ancorar o topo e fazer o Double parecer a escolha razoável.",
+        text: "Todos os 7 burgers viram Double no próprio modal por <b>+R$ 10 a +R$ 12</b>: nos 5 com Double pronto, pelo mesmo preço dele; no The Garden e no The Crunch, por +R$ 10 (custo da 2ª camada estimado), e o Double B.B.C. vira Triple por <b>+R$ 13</b>. Nenhum Double fica abaixo do preço de hoje, e todos ficam com CMV de 23% a 27%. O Triple existe para ancorar o topo e fazer o Double parecer a escolha razoável.",
         ref: "Thomas & Morwitz (2005) · Sharpe, Staelin & Huber (2008)" },
       double: { title: "Vira Double: margem que sobe em R$", tags: ["Upsell no modal"],
-        text: "A 2ª camada custa de <b>R$ 2,99 a R$ 4,74</b> a mais em insumo, conforme o sabor, e soma R$ 10 ou R$ 11 ao preço, nos 5 sabores com Double pronto, exatamente o preço dele. A margem em reais do pedido sobe mesmo com CMV um pouco maior. Meta do plano: 28% dos pedidos com Double ou Triple em 90 dias.",
+        text: "A 2ª camada custa de <b>R$ 2,99 a R$ 4,74</b> a mais em insumo, conforme o sabor, e soma de R$ 10 a R$ 12 ao preço, nos 5 sabores com Double pronto, exatamente o preço dele. A margem em reais do pedido sobe mesmo com CMV um pouco maior. Meta do plano: 28% dos pedidos com Double ou Triple em 90 dias.",
         ref: "Planilha CMV (Doubles) · plano de marca §12.2" },
       triple: { title: "Triple B.B.C.: âncora de teto", tags: ["Âncora real, não isca falsa"],
         text: "Decoys artificiais falham com estímulos reais. O Triple é um produto de verdade, a <b>R$ 62,90</b>, e faz o Double B.B.C. (R$ 49,90) parecer a escolha certa. Custo de R$ 17,97 extrapolado da ficha do Double: <b>precisa de custeio oficial</b> antes do lançamento.",
         ref: "Frederick, Lee & Baskin (2014) · plano de marca §6.4" },
       acomp: { title: "Acompanhamento que cabe no pedido de 1 pessoa", tags: ["Upsell", "Combo turbo"],
-        text: "A Batata Cheddar e Bacon só existia em tamanho de dividir. Agora tem <b>Individual a R$ 19,90</b> (CMV de cerca de 22%, custo estimado a partir da Super) e vira o combo turbo por +R$ 24, com a mesma economia de R$ 5,80. Chicken Bites PP a R$ 9,90 usa o sassami que a cozinha já tem.",
+        text: "A Batata Cheddar e Bacon só existia em tamanho de dividir. Agora tem <b>Individual a R$ 19,90</b> (CMV de cerca de 22%, custo estimado a partir da Super) e vira o combo turbo por +R$ 26, com a mesma economia de R$ 5,80. Chicken Bites PP a R$ 9,90 usa o sassami que a cozinha já tem.",
         ref: "Planilha CMV (Precificação N1)" },
       molhos: { title: "Molho com nome e dois preços", tags: ["Pura margem", "Assinatura"],
         text: "Nas redes de frango que mais crescem, o molho da casa com nome próprio vira ativo de marca (Chick-fil-A Sauce, Cane's Sauce). A maionese verde vira <b>Molho Verde da Casa</b>, o nome do plano da marca. Escolhido no próprio lanche ou acompanhamento, molho extra sai a <b>R$ 6,90</b> (6 opções; a Mostarda fica só no potinho); o potinho avulso, R$ 8,90 (Cheddar Punch R$ 11,90), como na planilha; o Trio de Molhos, R$ 19,90. Antes era R$ 6,49 num lugar e R$ 8,90 no outro.",
@@ -299,13 +299,13 @@
         text: "Todo burger, Double e o Triple têm o passo opcional <b>“Fecha com uma sobremesa?”</b>, logo depois do combo e do Vira Double, pelo preço do cardápio e sem nada marcado: Churros + Brigadeiro (<b>R$ 17,90</b>, margem de R$ 13,25), Mini Churros Individual (R$ 11,90) e Brigadeiro do Clube (R$ 9,90). Pra Dois e Pra Compartilhar oferecem sobremesa pra dividir. O passo marca a opção que fecha a meta do brinde. A sacola só sugere doce se o pedido ainda não tem e, acima de R$ 74,90, oferece o Mini Churros pra mergulhar no Brigadeiro de brinde.",
         ref: "DoorDash Merchants (add-on ligado ao item) · Baymard (sugestão na página do produto) · iFood N1 Burger Club (29/09/2026) · planilha CMV" },
       bebidas: { title: "Coca dentro da faixa de mercado", tags: ["Menos atrito na sacola"],
-        text: "A lata cai de R$ 11,90 para <b>R$ 9,90</b>: o mercado cobra de R$ 7,50 a R$ 9,90, e bebida cara na sacola é motivo de desistência. Normal ou sem açúcar vira escolha dentro do item.",
+        text: "A lata fica no preço de hoje, <b>R$ 11,90</b> (CMV de 30,6%, como na planilha). Dentro do combo, ela entra com a batata por +R$ 18 e o cliente vê a economia de R$ 5,80 na tela. Normal ou sem açúcar vira escolha dentro do item.",
         ref: "Benchmark Brasil (Poyos, Chicken Town) · planilha CMV" },
       carrinho: { title: "Sacola que completa o pedido", tags: ["Cross-sell por ausência", "Meta de brinde"],
-        text: "Sem bebida, sugere Coca (menos quando o resgate do combo ou do Date Night já traz a Coca); sem doce (nem no lanche), sobremesa; sem molho extra, o Verde da Casa (ou o Trio, se o pedido já tem Verde). Quando faltam até R$ 17,90 para a meta, o 1º card é o mais barato que libera o brinde. Acima da meta, a sacola não oferece o Brigadeiro que já vai de brinde: oferece o Mini Churros pra mergulhar nele. Se o burger foi sem combo, a sacola oferece o combo de novo, já com a escolha da Coca; se a Dupla foi sem complemento, oferece o Date Night. Barra de meta: <b>Brigadeiro de brinde acima de R$ 74,90</b> (custo R$ 2,02), sem contar os combos Pra Dois e Pra Compartilhar: eles passam da meta sozinhos, e ali o brinde seria só custo (o Date Night iria de 33,7% para 36,0% de CMV).",
+        text: "Sem bebida, sugere Coca (menos quando o resgate do combo ou do Date Night já traz a Coca); sem doce (nem no lanche), sobremesa; sem molho extra, o Verde da Casa (ou o Trio, se o pedido já tem Verde). Quando faltam até R$ 17,90 para a meta, o 1º card é o mais barato que libera o brinde. Acima da meta, a sacola não oferece o Brigadeiro que já vai de brinde: oferece o Mini Churros pra mergulhar nele. Se o burger foi sem combo, a sacola oferece o combo de novo, já com a escolha da Coca; se a Dupla foi sem complemento, oferece o Date Night. Barra de meta: <b>Brigadeiro de brinde acima de R$ 74,90</b> (custo R$ 2,02), sem contar os combos Pra Dois e Pra Compartilhar: eles passam da meta sozinhos, e ali o brinde seria só custo.",
         ref: "Baymard · Kivetz, Urminsky & Zheng (2006)" },
-      "combo-step": { title: "Combo: uma regra só", tags: ["+R$ 16 em qualquer burger", "Nada pago pré-marcado"],
-        text: "No N1 Burger Club de hoje (iFood), o modal do burger não oferece combo: só maionese, churros e brigadeiro. O combo é um item à parte e existe para 5 dos 11 burgers, com o preço cobrado em partes (burger, batata, Coca). Agora <b>qualquer burger vira combo por +R$ 16</b>, e a economia é sempre a mesma: <b>R$ 5,80</b>. O cliente precisa escolher: nenhuma opção paga vem marcada (CDC, art. 39, III).",
+      "combo-step": { title: "Combo: uma regra só", tags: ["+R$ 18 em qualquer burger", "Nada pago pré-marcado"],
+        text: "No N1 Burger Club de hoje (iFood), o modal do burger não oferece combo: só maionese, churros e brigadeiro. O combo é um item à parte e existe para 5 dos 11 burgers, com o preço cobrado em partes (burger, batata, Coca). Agora <b>qualquer burger vira combo por +R$ 18</b>, e a economia é sempre a mesma: <b>R$ 5,80</b>. O combo fica com CMV de 28% a 31%, perto da meta de 28% do plano. O cliente precisa escolher: nenhuma opção paga vem marcada (CDC, art. 39, III).",
         ref: "R3 Regra 1 · Sharpe & Staelin (2010) · CDC" },
       turbine: { title: "Turbine: upgrade do próprio lanche", tags: ["Preço de impulso", "12% a 20% do burger"],
         text: "O antigo Turbine vendia maionese e sobremesa. Agora é upgrade do burger: <b>bacon R$ 5,90, onion rings R$ 5,90 e cheddar R$ 4,90</b>, de 12% a 20% do preço do burger (menos nos Doubles e no Triple), e picles R$ 1,90 como impulso. Todos opcionais. A sobremesa ganhou passo próprio no modal.",
@@ -314,7 +314,7 @@
     sim: {
       base: 31.1, baseCmv: 0.22, orders: 600,
       levers: [
-        { id: "combo", label: "Pedidos em que o burger vira combo", before: 45, after: 65, max: 90, value: 16, valueBefore: 17, cmv: 0.49, note: "combo em qualquer burger por +R$ 16" },
+        { id: "combo", label: "Pedidos em que o burger vira combo", before: 45, after: 65, max: 90, value: 18, valueBefore: 17, cmv: 0.43, note: "combo em qualquer burger por +R$ 18" },
         { id: "dupla", label: "Pedidos com 2º burger (Dupla, Date Night)", before: 25, after: 30, max: 60, value: 23, valueBefore: 23, cmv: 0.35, note: "Dupla do Clube fixa na vitrine" },
         { id: "turbine", label: "Pedidos com adicional no modal (Turbine ou Vira Double)", before: 3, after: 15, max: 50, value: 7.5, cmv: 0.3, note: "Turbine virou upgrade do lanche; o Double pronto já entra no burger médio" },
         { id: "molho", label: "Pedidos com molho extra pago", before: 12, after: 20, max: 60, value: 6.9, valueBefore: 6.49, cmv: 0.25, note: "molho extra a R$ 6,90 no próprio item" },

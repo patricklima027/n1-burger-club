@@ -17,18 +17,18 @@
   /* ---------- o que muda ---------- */
   set("#mudancas-lede", "Mantivemos as fichas técnicas, as fotos no padrão da marca e os combos com personalidade. Mudamos o que travava o pedido e o ticket, com uma regra por decisão.");
   const CH = [
-    ["+R$ 16", "Qualquer burger vira combo", "Passo único no modal, economia sempre de R$ 5,80. Hoje, no iFood: combo só em 5 de 11 burgers, como item à parte, e nenhum no modal do burger.", "R3 Regra 1 · Sharpe & Staelin (2010)"],
+    ["+R$ 18", "Qualquer burger vira combo", "Passo único no modal, economia sempre de R$ 5,80, CMV do combo de 28% a 31%. Hoje, no iFood: combo só em 5 de 11 burgers, como item à parte, e nenhum no modal do burger.", "R3 Regra 1 · Sharpe & Staelin (2010)"],
     ["R$ 54,90", "Dupla do Clube, fixa", "2 The Original por R$ 27,45 cada. É o formato nº 1 da rede: 79.661 pedidos em 2025.", "Itens Vendidos 2025 (rede) · Nagle"],
     ["R$ 32,90", "The Crunch: novidade", "2 tiras de sassami, molho cheddar e picles. Zero insumo novo, CMV de 22%, no lugar do The Spicy enquanto o molho de pimenta não chega.", "Planilha CMV · plano de marca §6.3"],
-    ["+R$ 10 a 11", "Vira Double no próprio modal", "Nos 7 burgers, pelo mesmo preço do Double pronto (The Garden e The Crunch ganham Double só no modal); o Triple B.B.C. é a âncora de teto.", "Sharpe, Staelin & Huber (2008)"],
-    ["R$ 9,90 a 17,90", "Sobremesa em todo burger", "Passo “Fecha com uma sobremesa?” no modal, nada marcado, preço do cardápio. Combo The B.B.C. + Churros + Brigadeiro: R$ 73,80, e a sacola mostra que faltam R$ 1,10 para o brinde.", "iFood atual já pergunta a sobremesa · CDC art. 39, III"],
+    ["+R$ 10 a 12", "Vira Double no próprio modal", "Nos 7 burgers, pelo mesmo preço do Double pronto, nenhum abaixo do preço de hoje (The Garden e The Crunch ganham Double só no modal); o Triple B.B.C. é a âncora de teto.", "Sharpe, Staelin & Huber (2008)"],
+    ["R$ 9,90 a 17,90", "Sobremesa em todo burger", "Passo “Fecha com uma sobremesa?” no modal, nada marcado, preço do cardápio. Combo The B.B.C. + Churros + Brigadeiro: R$ 75,80, e o pedido já ganha o Brigadeiro de brinde.", "iFood atual já pergunta a sobremesa · CDC art. 39, III"],
     ["R$ 6,90", "Molho em todo pedido", "Molho Verde da Casa como assinatura; R$ 6,90 no modal do burger e dos acompanhamentos, avulso R$ 8,90, Trio de Molhos R$ 19,90.", "Chick-fil-A, Cane's · R3 Regra 5"],
   ];
   set("#changes", CH.map((c, i) => `<article class="card glass rv"><div class="n">${c[0]}</div><h3>${c[1]}</h3><p>${c[2]}</p><div class="s">${c[3]}</div></article>`).join(""));
 
   /* ---------- regras de preço ---------- */
   const RULES = [
-    ["+R$ 16", "combo em qualquer burger, economia fixa de R$ 5,80"],
+    ["+R$ 18", "combo em qualquer burger, economia fixa de R$ 5,80"],
     ["+R$ 10 a 13", "vira Double ou Triple no próprio modal, igual ao item pronto"],
     ["0", "item pago pré-marcado: sobremesa, Turbine e molho são sempre escolha do cliente"],
     ["R$ 74,90", "meta do brinde (Brigadeiro, custo R$ 2,02), visível na loja, no modal e na sacola"],
@@ -38,17 +38,17 @@
   /* ---------- antes × depois ---------- */
   const BA = [
     ["Nomes", "O Original, O B.B.C., O Verde, O Onion", "The Original, The B.B.C., The Garden, The Onion Storm, como no plano da marca", "Uma nomenclatura em todos os canais"],
-    ["Combo", "5 de 11 burgers, como item à parte; acréscimo de R$ 15 a R$ 19 sobre o burger; preço cobrado em partes, com o passo “Confirme seu burger” de 1 opção", "Qualquer burger, Double ou Triple vira combo por +R$ 16 no modal; economia fixa de R$ 5,80, mostrada no modal", "Regra única de bundling; menos toques até pedir"],
-    ["“2 por”", "Não existia no clube", "Dupla do Clube R$ 54,90, fixa na vitrine; +R$ 18 com Batata Super (R$ 72,90) ou +R$ 35 vira Date Night", "Formato nº 1 da rede (79.661 pedidos em 2025); escada 54,90 → 72,90 → 89,90"],
-    ["Pra dois", "Date Night R$ 96,90; Bacon Lover Duo e A Dupla B.B.C. com o mesmo papel", "Date Night R$ 89,90 com os burgers à escolha (com 2 B.B.C. sai R$ 97,90); Bacon Lover Duo e A Dupla B.B.C. (R$ 109,90) saem", "Topo da faixa de mercado (R$ 57 a R$ 90); uma opção por papel"],
-    ["Galera", "O Bonde R$ 199,90", "O Bonde R$ 169,90, no teto do orçamento da galera, com molho extra a R$ 6,90; Os Monstros com 2 molhos inclusos", "CMV de 30,3% e até 11% abaixo de 4 combos individuais"],
+    ["Combo", "5 de 11 burgers, como item à parte; acréscimo de R$ 15 a R$ 19 sobre o burger; preço cobrado em partes, com o passo “Confirme seu burger” de 1 opção", "Qualquer burger, Double ou Triple vira combo por +R$ 18 no modal; economia fixa de R$ 5,80, mostrada no modal", "Regra única de bundling; menos toques até pedir"],
+    ["“2 por”", "Não existia no clube", "Dupla do Clube R$ 54,90, fixa na vitrine; +R$ 24 com Batata Super (R$ 78,90) ou +R$ 42 vira Date Night", "Formato nº 1 da rede (79.661 pedidos em 2025); escada 54,90 → 78,90 → 96,90, cada degrau no CMV-alvo"],
+    ["Pra dois", "Date Night R$ 96,90; Bacon Lover Duo e A Dupla B.B.C. com o mesmo papel", "Date Night no mesmo preço (R$ 96,90), agora com os burgers à escolha: com 2 B.B.C. sai R$ 109,90 e com 2 Garlic + Onion Rings, R$ 112,90, os preços de hoje da A Dupla B.B.C. e do Bacon Lover Duo, que viram o mesmo pedido no Date Night", "Topo da faixa de mercado (R$ 57 a R$ 90); uma opção por papel"],
+    ["Galera", "O Bonde R$ 199,90", "O Bonde no mesmo preço (R$ 199,90), agora com 2 molhos da casa inclusos; Os Monstros entram a R$ 229,90, com 2 molhos", "Mais valor no mesmo preço; CMV de 27,4% e 29,6%, dentro do limite do plano"],
     ["Novidade", "Nenhuma", "The Crunch (2 tiras, cheddar e picles) e Triple B.B.C.", "Zero insumo novo no The Crunch"],
-    ["Doubles", "Double B.B.Q R$ 41,90, logo acima de R$ 40", "Double Smoke R$ 39,90; Vira Double no modal nos 7 burgers, pelo preço do Double pronto", "Dígito da esquerda (Thomas & Morwitz, 2005)"],
+    ["Doubles", "Double B.B.Q R$ 41,90, logo acima de R$ 40", "Double Smoke R$ 41,90 (mesmo preço) e Double Original R$ 43,90; Vira Double no modal nos 7 burgers, pelo preço do Double pronto", "Nenhum preço abaixo do de hoje; CMV de 23% a 27%"],
     ["Descrições", "O Onion “com molho cheddar” (a ficha usa maionese de bacon); “filé” para 2 tiras de sassami", "Texto igual à ficha técnica: tiras de sassami e o que vai de verdade", "Foto e texto fiéis evitam reclamação e cancelamento"],
     ["Turbine", "Maionese, churros e brigadeiro", "Bacon, onion rings e cheddar (R$ 4,90 a R$ 5,90) e picles (R$ 1,90)", "Upgrade do lanche, 12% a 20% do preço do burger"],
     ["Sobremesa", "Só no Turbine do burger: Mini Churros Individual +R$ 11,90 e Brigadeiro N1 +R$ 9,90", "“Fecha com uma sobremesa?” em todo burger e nos combos: Churros + Brigadeiro R$ 17,90, Mini Churros R$ 11,90, Brigadeiro R$ 9,90; acima de R$ 74,90 o Brigadeiro vai de brinde", "Mesmo preço em todo lugar; o combo de doce vale mais que 2 doces avulsos"],
     ["Molhos", "R$ 6,49 no Turbine e R$ 8,90 na planilha", "R$ 6,90 no modal do burger e dos acompanhamentos; avulso R$ 8,90 (Cheddar Punch R$ 11,90); Trio de Molhos R$ 19,90", "Molho com nome vira marca; custa R$ 1,70"],
-    ["Bebidas", "Coca lata R$ 11,90", "Coca lata R$ 9,90", "Mercado R$ 7,50 a R$ 11,90; R$ 9,90 fica no meio"],
+    ["Bebidas", "Coca lata R$ 11,90", "Coca lata R$ 11,90 (mesmo preço); no combo, com a batata por +R$ 18 e economia de R$ 5,80 na tela", "CMV de 30,6%, como na planilha"],
     ["Selos", "“Mais pedido” no B.B.C., sem dado", "“Favorito da rede” no The Garden (14.045 pedidos da mesma receita na rede); “Mais pedido” só com dado desta loja; B.B.C. vira carro-chefe", "Prova social só onde é verdade"],
     ["Calendário", "Brindes de até R$ 6,64 por pedido (Squad Saturday)", "Brinde grátis só até cerca de R$ 2 por pedido (Brigadeiro, R$ 2,02); o resto vira desconto anunciado", "Efeito do grátis só em insumo barato (Shampanier et al., 2007)"],
     ["5 to Free", "Contagem do zero até o 6º pedido", "Cliente já começa com 1 de 6; prêmio The Original (custo R$ 7,02), como no plano", "Progresso dotado (Nunes & Drèze, 2006)"],
@@ -83,7 +83,7 @@
     ["Brasil", "Burger King Brasil", "“2x1” e “King em Dobro” como categorias fixas.", "Dupla do Clube fixa em Pra Dois"],
     ["Brasil", "KFC Brasil", "Adicionais de R$ 3 a R$ 6 (cheddar, onion, bacon) sobre a mesma base.", "Turbine de R$ 1,90 a R$ 5,90 nos burgers e doubles"],
     ["Brasil", "Poyos (Curitiba)", "Só frango, 2 tiras no sanduíche e combos nomeados por número de pessoas.", "Pra Dois e Pra Compartilhar com “serve X pessoas”"],
-    ["Brasil", "Chicken Town (SP)", "Lata a R$ 7,99 no delivery.", "Coca lata sai de R$ 11,90 para R$ 9,90"],
+    ["Brasil", "Chicken Town (SP)", "Lata a R$ 7,99 no delivery.", "Referência de preço de bebida; a lata do clube fica em R$ 11,90"],
     ["Brasil", "Jeronimo", "Escada de tamanho pela quantidade de proteína no mesmo produto.", "Vira Double e Triple no próprio modal"],
   ];
   set("#refs", REFS.map((r) => `<article class="ref-card glass rv"><div class="flag">${r[0]}</div><h3>${r[1]}</h3><p>${r[2]}</p><div class="take">${r[3]}</div></article>`).join(""));
@@ -97,7 +97,7 @@
     ["Delivering the Digital Restaurant", "Meredith Sandland e Carl Orsbourn · cap. 8, 11 e 12", "Combo e complemento programados no fluxo digital; adicional que vende é o da casa; menu curto no celular; foto real.", "Mudou hoje: a Mostarda sai do molho pago (6 opções, dentro do guia do iFood). Pendência: fotografar os itens com imagem de IA antes do iFood."],
     ["Restaurant Marketing: Competency Guide", "NRAEF ManageFirst · cap. 4 e 5", "Bundling e upselling sobem o ticket; desconto em excesso desvaloriza o preço cheio; promoção se mede antes, durante e depois.", "Confirma o combo em 100% dos burgers e a sobremesa no modal; reforça que todo “separado” é a soma real."],
     ["Successful Service Operations Management", "Richard Metters, Kathryn King-Metters e Madeleine Pullman · cap. 7, 9 e 12", "O gargalo define a capacidade; linha curta e modular; tirar trabalho do horário de pico.", "Confirma a porção padrão (2 tiras por camada) e o kit único do combo. Plano de pico da fritadeira vai para a operação."],
-    ["How to Franchise Your Business", "Brian Duckett e Paul Monaghan · cap. 2, 14 e 16", "Formato fácil de aprender e de duplicar; uma regra só, documentada; margem bruta abaixo do esperado sinaliza desconto ou porção errada.", "Confirma a regra única de combo (+R$ 16) e a porção declarada em 13 de 13 burgers; o Vira Double com uma receita só por preço."],
+    ["How to Franchise Your Business", "Brian Duckett e Paul Monaghan · cap. 2, 14 e 16", "Formato fácil de aprender e de duplicar; uma regra só, documentada; margem bruta abaixo do esperado sinaliza desconto ou porção errada.", "Confirma a regra única de combo (+R$ 18) e a porção declarada em 13 de 13 burgers; o Vira Double com uma receita só por preço."],
   ];
   set("#books", BOOKS.map((b, i) => `<article class="panel book rv"><div class="b-n">${String(i + 1).padStart(2, "0")}</div><div><h3>${b[0]}</h3><div class="b-a">${b[1]}</div><p>${b[2]}</p><div class="take">${b[3]}</div></div></article>`).join("") +
     `<p class="src books-note rv">Não auditados: The Strategy and Tactics of Pricing (Nagle), porque o PDF é escaneado e não tem texto, e Trustworthy Online Controlled Experiments (Kohavi, Tang e Xu), em formato AZW3. A conta de empate e o plano de testes seguem o método desses autores pelos sumários das editoras. Os livros foram usados só como referência: nenhum trecho é reproduzido aqui.</p>`);
@@ -115,7 +115,7 @@
       <li>2. Dupla do Clube a R$ 54,90 × R$ 49,90 (a R$ 49,90 o empate exige +43% de pares).</li>
       <li>3. “Peça também” na sacola × holdout.</li>
       <li>4. Meta do brinde em R$ 74,90 × R$ 69,90.</li>
-      <li>5. Double Original a R$ 42,90 × R$ 39,90: o 2º preço do lado errado da dezena apontado na pesquisa (R3, Regra 4).</li>
+      <li>5. Combo a +R$ 18 × +R$ 19 no modal (medir aceite do combo e margem por visita).</li>
       <li>6. Pra Dois antes × depois de Chicken Burgers na ordem das categorias.</li>
       <li>7. Passo “Fecha com uma sobremesa?” × sem o passo. Guardrails: conversão do modal, tempo até adicionar e attach de Turbine e molho (a sobremesa não pode roubar o molho).</li></ul>
       <p class="src">Conversão de 10% → 11% pede ~15 mil visitas por versão, meses de tráfego numa loja só: por isso a conversão é medida antes × depois (4 + 4 semanas no funil do Portal) e o A/B fica nas métricas do modal, de taxa alta (combo de 45% → 55%: ~390 modais abertos por versão). Cada teste cobre semanas cheias, com o pico das 20h.</p></div>`
@@ -128,7 +128,7 @@
       <li><b>Triple B.B.C.:</b> custo de R$ 17,97 extrapolado da ficha do Double. Precisa de custeio oficial na planilha.</li>
       <li><b>The Smoke:</b> a foto mostra picles, mas a ficha técnica não tem. Decidir se entra (+R$ 0,19) ou se a foto é refeita.</li>
       <li><b>Double Day:</b> a 2ª camada custa de R$ 2,99 a R$ 4,74, acima do teto do brinde grátis (cerca de R$ 2) e dos R$ 2,55 do plano. Vira desconto anunciado em todos os sabores, sem camada grátis.</li>
-      <li><b>Coca-Cola:</b> o plano de marca lista a lata a R$ 7,90 na rede (N1 Chicken, marca-mãe); aqui ela fica a R$ 9,90 (faixa de mercado) para manter a economia do combo. Testar R$ 7,90 × R$ 9,90.</li>
+      <li><b>Preço pelo CMV:</b> todo preço sai do custo da planilha ÷ CMV-alvo, arredondado para ,90, e nenhum item do cardápio de hoje fica mais barato. Revisar os preços a cada atualização da planilha de custos.</li>
       <li><b>Sobremesa no modal:</b> criar o modificador na comanda e no PDV (sai junto do pedido, embalagem separada). A porção “pra dividir” do Mini Churros Super (R$ 32,90) precisa de gramatura oficial.</li>
       <li><b>Os Monstros:</b> a linha “A Monstra” da planilha (R$ 58,40) fica R$ 4,50 abaixo da soma das fichas da composição anunciada (4 Double Original + Mega + Coca grande). O site usa a soma (R$ 67,94, CMV 30,9%). Confirmar com quem mantém a planilha.</li>
       <li><b>Double The Garden e Double The Crunch:</b> existem só no modal; custo da 2ª camada estimado em +R$ 3,28. Custear na planilha.</li>

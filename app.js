@@ -364,7 +364,7 @@
           .join("")}</ul>
         ${
           rescueIdx >= 0
-            ? `<button class="rescue" data-rescue="${rescueIdx}"><img src="img/novo/thumb-batata-coca.jpg" alt="" /><span><b>Complete o ${esc(state.cart[rescueIdx].name)} como combo</b><br>+ Batata Crispy Individual + Coca lata por +R$ 16,00 · economize R$ 5,80</span><i>+</i></button>`
+            ? `<button class="rescue" data-rescue="${rescueIdx}"><img src="img/novo/thumb-batata-coca.jpg" alt="" /><span><b>Complete o ${esc(state.cart[rescueIdx].name)} como combo</b><br>+ Batata Frita Crocante Individual + Coca lata por +R$ 16,00 · economize R$ 5,80</span><i>+</i></button>`
             : ""
         }
         ${
@@ -496,7 +496,7 @@
       if (rs) {
         const l = state.cart[+rs.dataset.rescue];
         l.opts = l.opts.filter((o) => o.name !== "Só o burger");
-        l.opts = l.opts.filter((o) => o.g !== "combo"); l.opts.unshift({ g: "combo", name: "Combo: + Batata Crispy Individual + Coca lata", n: 1, price: 16 });
+        l.opts = l.opts.filter((o) => o.g !== "combo"); l.opts.unshift({ g: "combo", name: "Combo: + Batata Frita Crocante Individual + Coca lata", n: 1, price: 16 });
         l.unit += 16;
         renderBag(true);
         toast("Virou combo");

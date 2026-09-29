@@ -13,7 +13,7 @@
   const gCombo = () => ({
     id: "combo", title: "Vira Combo N1?", hint: "Escolha 1 · o combo sai R$ 5,80 mais barato que separado", min: 1, max: 1, highlight: true, why: "combo-step",
     options: [
-      { id: "combo", name: "Combo: + Batata Crispy Individual + Coca lata", price: COMBO, img: N + "thumb-batata-coca.jpg", desc: "Separado sairia R$ 21,80 · economize R$ 5,80" },
+      { id: "combo", name: "Combo: + Batata Frita Crocante Individual + Coca lata", price: COMBO, img: N + "thumb-batata-coca.jpg", desc: "Separado sairia R$ 21,80 · economize R$ 5,80" },
       { id: "turbo", name: "Combo turbo: + Batata Loaded Individual + Coca lata", price: 24, img: H + "batata-cheddar-e-bacon.jpg", desc: "Separado sairia R$ 29,80 · economize R$ 5,80" },
       { id: "solo", name: "Só o lanche" },
     ],
@@ -62,7 +62,7 @@
   const burger = (extra = []) => [gCombo(), gDrink(), ...extra, gTurbine(), gMolho()];
   const PICK = [
     ["original", "The Original", 0, H + "o-original.jpg"],
-    ["smoke", "The Smoke", 0, H + "barbecue-burger-club.jpg"],
+    ["smoke", "The Smoke", 0, H + "chicken-bbq.jpg"],
     ["crunch", "The Crunch", 1, N + "the-crunch.jpg", true],
     ["garden", "The Garden", 2, H + "verde.jpg"],
     ["garlic", "The Garlic", 4, H + "garlic-bacon.jpg"],
@@ -82,23 +82,23 @@
     { id: "dupla-clube", cat: "pra-dois", name: "Dupla do Clube", img: N + "dupla-clube.jpg", ai: true, price: P_DUPLA, old: 63.8, badge: { text: "Leve 2", tone: "pink" }, serves: "2 burgers", why: "dupla",
       desc: "2 The Original: 2 tiras de sassami crocante e Molho Verde da Casa no brioche. Sai R$ 27,45 cada.",
       groups: [gMolhoIncluso(1), { id: "completar", title: "Quer completar a dupla?", hint: "Opcional · vira um Date Night", min: 0, max: 1, why: "dupla",
-        options: [{ id: "dn", name: "+ Batata Crispy Super pra dividir + 2 Cocas lata", price: +(89.9 - P_DUPLA).toFixed(2), img: H + "date-night.jpg", desc: "Separado sairia R$ 54,70" }] },
+        options: [{ id: "dn", name: "+ Batata Frita Crocante Super pra dividir + 2 Cocas lata", price: +(89.9 - P_DUPLA).toFixed(2), img: H + "date-night.jpg", desc: "Separado sairia R$ 54,70" }] },
         { ...duasCocas, showIf: { g: "completar", any: ["dn"] } }],
       role: "Isca de conversão", cost: 15.0 },
     { id: "date-night", cat: "pra-dois", name: "Date Night", img: H + "date-night.jpg", price: 89.9, old: 118.5, fromLabel: true, serves: "Serve 2 pessoas", tag: "Sextou pra dois",
-      desc: "2 burgers à sua escolha + Batata Crispy Super pra dividir + 2 Cocas lata. Sem briga sobre o que pedir.",
-      groups: [pick(2), sizes("lado", "Acompanhamento pra dividir", [["batata", "Batata Crispy Super", 0], ["aipim", "Aipim Frito Super", 0], ["onion", "Onion Rings Super", 2], ["loaded", "Batata Loaded Super", 8]]), duasCocas, gMolhoIncluso(1)],
+      desc: "2 burgers à sua escolha + Batata Frita Crocante Super pra dividir + 2 Cocas lata. Sem briga sobre o que pedir.",
+      groups: [pick(2), sizes("lado", "Acompanhamento pra dividir", [["batata", "Batata Frita Crocante Super", 0], ["aipim", "Aipim Frito Super", 0], ["onion", "Onion Rings Super", 2], ["loaded", "Batata Loaded Super", 8]]), duasCocas, gMolhoIncluso(1)],
       role: "Estrela do ticket", cost: 30.34 },
     { id: "dupla-bbc", cat: "pra-dois", name: "A Dupla B.B.C.", img: H + "a-dupla-b-b-c.jpg", price: 109.9, old: 134.5, serves: "Serve 2 pessoas",
-      desc: "2 The B.B.C. + Batata Crispy Super pra dividir + 2 Cocas lata. Dois de respeito.",
+      desc: "2 The B.B.C. + Batata Frita Crocante Super pra dividir + 2 Cocas lata. Dois de respeito.",
       groups: [duasCocas, gMolhoIncluso(1)], role: "Estrela do ticket", cost: 33.27 },
 
     /* ===== Pra Compartilhar ===== */
     { id: "o-bonde", cat: "pra-compartilhar", name: "O Bonde", img: A + "o-bonde.jpg", price: 189.9, old: 211.4, fromLabel: true, badge: { text: "2 molhos inclusos", tone: "yellow" }, serves: "Serve 3 a 4 pessoas",
-      desc: "4 burgers à escolha + Batata Crispy Mega + Coca grande + 2 molhos da casa.",
+      desc: "4 burgers à escolha + Batata Frita Crocante Mega + Coca grande + 2 molhos da casa.",
       groups: [pick(4), gMolhoIncluso(2), cocaGrande], role: "Volume (grupo)", cost: 54.82 },
     { id: "a-monstra", cat: "pra-compartilhar", name: "A Monstra", img: H + "a-monstra.jpg", price: 219.9, old: 255.4, badge: { text: "Fome grande", tone: "red" }, serves: "Serve 4 pessoas com folga",
-      desc: "4 Double Original + Batata Crispy Mega + Coca grande + 2 molhos da casa. Pede com responsabilidade.",
+      desc: "4 Double Original + Batata Frita Crocante Mega + Coca grande + 2 molhos da casa. Pede com responsabilidade.",
       groups: [gMolhoIncluso(2), cocaGrande], role: "Âncora de teto", cost: 63.44 },
 
     /* ===== Chicken Burgers ===== */
@@ -120,7 +120,7 @@
     { id: "the-original", cat: "burgers", name: "The Original", img: H + "o-original.jpg", price: 31.9, tag: "O clássico",
       desc: "2 tiras de sassami crocante e Molho Verde da Casa no brioche. Simples do jeito certo.",
       groups: burger([gDouble(11)]), role: "Base de combo", cost: 7.02 },
-    { id: "the-smoke", cat: "burgers", name: "The Smoke", img: H + "barbecue-burger-club.jpg", price: 29.9,
+    { id: "the-smoke", cat: "burgers", name: "The Smoke", img: H + "chicken-bbq.jpg", price: 29.9,
       desc: "Barbecue defumado sobre 2 tiras de sassami crocante, no brioche.",
       groups: burger([gDouble(10)]), role: "Entrada de preço", cost: 6.75 },
 
@@ -145,7 +145,7 @@
       groups: [gCombo(), gDrink(), gMolho()], role: "Âncora de teto", cost: 17.97, est: true },
 
     /* ===== Acompanhamentos ===== */
-    { id: "batata", cat: "acomp", name: "Batata Crispy", img: H + "batata-frita.jpg", price: 0, fromLabel: true,
+    { id: "batata", cat: "acomp", name: "Batata Frita Crocante", img: H + "batata-frita.jpg", price: 0, fromLabel: true,
       desc: "Batata palito crocante, sal na medida.",
       groups: [sizes("tam", "Escolha o tamanho", [["ind", "Individual", 11.9], ["super", "Super", 34.9, "Serve 2 a 3"], ["mega", "Mega", 59.9, "Serve 4 a 5"]])], role: "Ancoragem p/ combo", cost: 2.02 },
     { id: "batata-loaded", cat: "acomp", name: "Batata Loaded", img: H + "batata-cheddar-e-bacon.jpg", price: 0, fromLabel: true, badge: { text: "Novo tamanho", tone: "yellow" }, why: "acomp",
@@ -205,7 +205,7 @@
   items.filter((i) => ["burgers", "doubles"].includes(i.cat)).forEach((it) =>
     add("combo", `Combo ${it.name}`, it.price + COMBO, +(it.cost + OVERHEAD).toFixed(2), "Combo via modal (+R$ 16)", false, it.est));
   [
-    ["acomp", "Batata Crispy Individual", 11.9, 2.02, "Ancoragem p/ combo"], ["acomp", "Batata Crispy Super", 34.9, 7.09, "Compartilhado"], ["acomp", "Batata Crispy Mega", 59.9, 13.57, "Upsell familiar"],
+    ["acomp", "Batata Frita Crocante Individual", 11.9, 2.02, "Ancoragem p/ combo"], ["acomp", "Batata Frita Crocante Super", 34.9, 7.09, "Compartilhado"], ["acomp", "Batata Frita Crocante Mega", 59.9, 13.57, "Upsell familiar"],
     ["acomp", "Batata Loaded Individual", 19.9, 4.38, "Upsell (combo turbo)", true], ["acomp", "Batata Loaded Super", 42.9, 9.93, "Compartilhado"], ["acomp", "Batata Loaded Mega", 79.9, 19.25, "Upsell familiar"],
     ["acomp", "Onion Rings Individual", 12.9, 2.62, "Impulso"], ["acomp", "Onion Rings Super", 36.9, 9.34, "Compartilhado"], ["acomp", "Onion Rings Mega", 62.9, 18.63, "Upsell familiar"],
     ["acomp", "Aipim Frito Individual", 12.9, 1.71, "Ancoragem p/ combo"], ["acomp", "Aipim Frito Super", 32.9, 6.17, "Ancoragem p/ combo"], ["acomp", "Aipim Frito Mega", 54.9, 11.5, "Ancoragem p/ combo"],

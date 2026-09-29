@@ -124,7 +124,34 @@
     const target = Math.min(avail / APP_H, (vw * (narrow ? 0.94 : 0.4)) / APP_W, 1.3);
     L = { vw, vh, cx: sx + sw / 2, cy: sy + sh / 2, Z: target / a0, a0, narrow, fy: topH + (vh - topH) / 2 };
     world.style.transformOrigin = `${L.cx}px ${L.cy}px`;
+    fitCopy(ox + (SCR.x0 - 80) * s, narrow);
     tick(true);
+  }
+
+  /* a manchete cabe sempre dentro do vidro e à esquerda do celular */
+  function fitCopy(phoneLeft, narrow) {
+    const copy = document.getElementById("hero-copy");
+    const h1 = copy && copy.querySelector("h1");
+    if (!h1) return;
+    h1.style.fontSize = "";
+    copy.style.maxWidth = "";
+    if (narrow) return;
+    const cs = getComputedStyle(copy);
+    const left = copy.getBoundingClientRect().left;
+    const avail = Math.max(280, phoneLeft - left - 24);
+    copy.style.maxWidth = avail + "px";
+    const pad = parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight);
+    let wmax = 0;
+    $$(".sh-line", h1).forEach((line) => {
+      const ls = line.querySelectorAll(".sh-l");
+      if (!ls.length) return;
+      wmax = Math.max(wmax, ls[ls.length - 1].getBoundingClientRect().right - ls[0].getBoundingClientRect().left);
+    });
+    const room = avail - pad;
+    if (wmax > room) {
+      const fs = parseFloat(getComputedStyle(h1).fontSize);
+      h1.style.fontSize = Math.max(32, Math.floor((fs * room) / wmax)) + "px";
+    }
   }
 
   /* ---------- quadro a quadro ---------- */
@@ -223,6 +250,7 @@
   };
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", layout);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
   if (img.complete) layout();
   else img.addEventListener("load", layout, { once: true });
   layout();

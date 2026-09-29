@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <path id="arcTop" d="M 78 200 A 122 122 0 0 1 322 200"/>
+    <path id="arcBot" d="M 66 200 A 134 134 0 0 0 334 200"/>
+  </defs>
+  <circle cx="200" cy="200" r="196" fill="#0D0D0D"/>
+  <circle cx="200" cy="200" r="178" fill="none" stroke="#F4EFE1" stroke-width="5"/>
+  <text font-family="Bebas Neue, Oswald, Impact, sans-serif" font-size="58" letter-spacing="7" fill="#F4EFE1" text-anchor="middle"><textPath href="#arcTop" startOffset="50%">BURGER CLUB</textPath></text>
+  <text font-family="Bebas Neue, Oswald, Impact, sans-serif" font-size="44" letter-spacing="5" fill="#F4EFE1" text-anchor="middle" dominant-baseline="hanging"><textPath href="#arcBot" startOffset="50%">CHICKEN BURGERS</textPath></text>
+  <g transform="translate(112 158) scale(0.9)"><path fill="#E21D24" d="M0 0 L0 100 L41 100 L41 50.6 L92.8 100 L143 100 L143 41.4 L130.9 41.4 L130.9 9.3 L141.8 0 L93.6 0 L93.6 44.7 L46.8 0Z M158.6 0 L193.4 0 L193.4 100 L153.9 100 L153.9 33.2 L140.1 33.2 L140.1 12.6Z"/></g>
+  <path fill="#D4A017" d="M62 200 l6 -12 l6 12 l13 2 l-10 9 l3 13 l-12 -7 l-12 7 l3 -13 l-10 -9z" transform="translate(-6 -6)"/>
+  <path fill="#D4A017" d="M326 200 l6 -12 l6 12 l13 2 l-10 9 l3 13 l-12 -7 l-12 7 l3 -13 l-10 -9z" transform="translate(-6 -6)"/>
+</svg>

@@ -17,7 +17,7 @@
   /* ---------- o que muda ---------- */
   set("#mudancas-lede", "Mantivemos as fichas técnicas, as fotos no padrão da marca e os combos com personalidade. Mudamos o que travava o pedido e o ticket, com uma regra por decisão.");
   const CH = [
-    ["+R$ 16", "Qualquer burger vira combo", "Passo único no modal, economia sempre de R$ 5,80. No iFood hoje: 0 de 8 burgers com combo no item (no rascunho do app, 5 de 11).", "R3 Regra 1 · Sharpe & Staelin (2010)"],
+    ["+R$ 16", "Qualquer burger vira combo", "Passo único no modal, economia sempre de R$ 5,80. Hoje, no iFood: combo só em 5 de 11 burgers, como item à parte, e nenhum no modal do burger.", "R3 Regra 1 · Sharpe & Staelin (2010)"],
     ["R$ 54,90", "Dupla do Clube, fixa", "2 The Original por R$ 27,45 cada. É o formato nº 1 da rede: 79.661 pedidos em 2025.", "Itens Vendidos 2025 (rede) · Nagle"],
     ["R$ 32,90", "The Crunch: novidade", "2 tiras de sassami, molho cheddar e picles. Zero insumo novo, CMV de 22%, no lugar do The Spicy enquanto o molho de pimenta não chega.", "Planilha CMV · plano de marca §6.3"],
     ["+R$ 10 a 11", "Vira Double no próprio modal", "Nos 7 burgers, pelo mesmo preço do Double pronto (The Garden e The Crunch ganham Double só no modal); o Triple B.B.C. é a âncora de teto.", "Sharpe, Staelin & Huber (2008)"],
@@ -38,7 +38,7 @@
   /* ---------- antes × depois ---------- */
   const BA = [
     ["Nomes", "O Original, O B.B.C., O Verde, O Onion", "The Original, The B.B.C., The Garden, The Onion Storm, como no plano da marca", "Uma nomenclatura em todos os canais"],
-    ["Combo", "5 de 11 burgers; acréscimo de R$ 15 a R$ 19; 17 etapas com uma só opção", "Qualquer burger, Double ou Triple vira combo por +R$ 16 no modal; economia fixa de R$ 5,80, mostrada no modal", "Regra única de bundling; menos toques até pedir"],
+    ["Combo", "5 de 11 burgers, como item à parte; acréscimo de R$ 15 a R$ 19 sobre o burger; preço cobrado em partes, com o passo “Confirme seu burger” de 1 opção", "Qualquer burger, Double ou Triple vira combo por +R$ 16 no modal; economia fixa de R$ 5,80, mostrada no modal", "Regra única de bundling; menos toques até pedir"],
     ["“2 por”", "Não existia no clube", "Dupla do Clube R$ 54,90, fixa na vitrine; +R$ 18 com Batata Super (R$ 72,90) ou +R$ 35 vira Date Night", "Formato nº 1 da rede (79.661 pedidos em 2025); escada 54,90 → 72,90 → 89,90"],
     ["Pra dois", "Date Night R$ 96,90; Bacon Lover Duo e A Dupla B.B.C. com o mesmo papel", "Date Night R$ 89,90 com os burgers à escolha (com 2 B.B.C. sai R$ 97,90); Bacon Lover Duo e A Dupla B.B.C. (R$ 109,90) saem", "Topo da faixa de mercado (R$ 57 a R$ 90); uma opção por papel"],
     ["Galera", "O Bonde R$ 199,90", "O Bonde R$ 169,90, no teto do orçamento da galera, com molho extra a R$ 6,90; Os Monstros com 2 molhos inclusos", "CMV de 30,3% e até 11% abaixo de 4 combos individuais"],
@@ -46,10 +46,10 @@
     ["Doubles", "Double B.B.Q R$ 41,90, logo acima de R$ 40", "Double Smoke R$ 39,90; Vira Double no modal nos 7 burgers, pelo preço do Double pronto", "Dígito da esquerda (Thomas & Morwitz, 2005)"],
     ["Descrições", "O Onion “com molho cheddar” (a ficha usa maionese de bacon); “filé” para 2 tiras de sassami", "Texto igual à ficha técnica: tiras de sassami e o que vai de verdade", "Foto e texto fiéis evitam reclamação e cancelamento"],
     ["Turbine", "Maionese, churros e brigadeiro", "Bacon, onion rings e cheddar (R$ 4,90 a R$ 5,90) e picles (R$ 1,90)", "Upgrade do lanche, 12% a 20% do preço do burger"],
-    ["Sobremesa", "Churros e brigadeiro só no Turbine; no iFood, “Qual sua sobremesa hoje?” com Brigadeiro a +R$ 7,99 (a planilha diz R$ 9,90)", "“Fecha com uma sobremesa?” em todo burger e nos combos: Churros + Brigadeiro R$ 17,90, Mini Churros R$ 11,90, Brigadeiro R$ 9,90; acima de R$ 74,90 o Brigadeiro vai de brinde", "Mesmo preço em todo lugar; o combo de doce vale mais que 2 doces avulsos"],
+    ["Sobremesa", "Só no Turbine do burger: Mini Churros Individual +R$ 11,90 e Brigadeiro N1 +R$ 9,90", "“Fecha com uma sobremesa?” em todo burger e nos combos: Churros + Brigadeiro R$ 17,90, Mini Churros R$ 11,90, Brigadeiro R$ 9,90; acima de R$ 74,90 o Brigadeiro vai de brinde", "Mesmo preço em todo lugar; o combo de doce vale mais que 2 doces avulsos"],
     ["Molhos", "R$ 6,49 no Turbine e R$ 8,90 na planilha", "R$ 6,90 no modal do burger e dos acompanhamentos; avulso R$ 8,90 (Cheddar Punch R$ 11,90); Trio de Molhos R$ 19,90", "Molho com nome vira marca; custa R$ 1,70"],
-    ["Bebidas", "Coca lata R$ 11,90", "Coca lata R$ 9,90", "Mercado R$ 7,50 a R$ 9,90"],
-    ["Selos", "“Mais pedido” no B.B.C., sem dado", "“Mais pedido” só no The Garden (14.045 pedidos da mesma receita na rede); B.B.C. vira carro-chefe", "Prova social só onde é verdade"],
+    ["Bebidas", "Coca lata R$ 11,90", "Coca lata R$ 9,90", "Mercado R$ 7,50 a R$ 11,90; R$ 9,90 fica no meio"],
+    ["Selos", "“Mais pedido” no B.B.C., sem dado", "“Favorito da rede” no The Garden (14.045 pedidos da mesma receita na rede); “Mais pedido” só com dado desta loja; B.B.C. vira carro-chefe", "Prova social só onde é verdade"],
     ["Calendário", "Brindes de até R$ 6,64 por pedido (Squad Saturday)", "Brinde grátis só até cerca de R$ 2 por pedido (Brigadeiro, R$ 2,02); o resto vira desconto anunciado", "Efeito do grátis só em insumo barato (Shampanier et al., 2007)"],
     ["5 to Free", "Contagem do zero até o 6º pedido", "Cliente já começa com 1 de 6; prêmio The Original (custo R$ 7,02), como no plano", "Progresso dotado (Nunes & Drèze, 2006)"],
   ];
@@ -132,7 +132,7 @@
       <li><b>Sobremesa no modal:</b> criar o modificador na comanda e no PDV (sai junto do pedido, embalagem separada). A porção “pra dividir” do Mini Churros Super (R$ 32,90) precisa de gramatura oficial.</li>
       <li><b>Os Monstros:</b> a linha “A Monstra” da planilha (R$ 58,40) fica R$ 4,50 abaixo da soma das fichas da composição anunciada (4 Double Original + Mega + Coca grande). O site usa a soma (R$ 67,94, CMV 30,9%). Confirmar com quem mantém a planilha.</li>
       <li><b>Double The Garden e Double The Crunch:</b> existem só no modal; custo da 2ª camada estimado em +R$ 3,28. Custear na planilha.</li>
-      <li><b>Selos:</b> “Mais pedido” no The Garden usa o dado da rede. Revisar todos os selos em D+60 com o dado do próprio clube.</li>
+      <li><b>Selos:</b> “Favorito da rede” no The Garden usa o dado da rede. Revisar todos os selos em D+60 com o dado do próprio clube.</li>
       <li><b>Imagens ilustrativas:</b> The Crunch, Triple B.B.C., Dupla do Clube, Chicken Bites, Churros + Brigadeiro e a capa foram geradas por IA a partir das fotos reais. Fotografar antes de publicar.</li></ul>`
   );
 

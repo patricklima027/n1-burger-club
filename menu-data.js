@@ -59,7 +59,7 @@
     id: "molho-incluso", title: n > 1 ? `${n} molhos da casa inclusos` : "Molho da casa incluso", hint: `Escolha ${n} · ${n > 1 ? "já estão" : "já está"} no preço`, min: n, max: n,
     options: SAUCES.map(([id, name, img]) => ({ id, name, img })),
   });
-  /* Sobremesa no modal: opcional, preço do cardápio, nada marcado (CDC art. 39, III).
+  /* Sobremesa na tela do item: opcional, preço do cardápio, nada marcado (CDC art. 39, III).
      No burger é 1 só (evita Brigadeiro + Mini Churros avulsos, R$ 21,80, no lugar do Churros + Brigadeiro, R$ 17,90). */
   const DOCE = {
     cb: { id: "churros-brigadeiro", name: "Churros + Brigadeiro", price: 17.9, cost: 4.65, img: N + "churros-brigadeiro.jpg", ai: true, desc: "Mini churros e brigadeiro pra mergulhar · separado sairia R$ 21,80" },
@@ -213,7 +213,7 @@
       role: "Conveniência", cost: 9.91 },
   ];
 
-  /* ---------- engenharia (tabela da página): itens + combos via modal + tamanhos ---------- */
+  /* ---------- engenharia (tabela da página): itens + combos na tela do item + tamanhos ---------- */
   const OVERHEAD = 7.76; // batata individual + Coca lata + embalagens do combo = linha do combo na planilha − ficha do burger sem kraft (bate 5 linhas); o kraft entra uma vez, dentro de it.cost
   const eng = [];
   const add = (cat, name, price, cost, role, isNew, est) => eng.push({ cat, name, price, cost, role, isNew, est });
@@ -222,17 +222,17 @@
     add(it.cat, it.name, it.price, it.cost, it.role, /Novo/.test(it.badge?.text || "") || it.id === "dupla-clube", it.est);
   });
   items.filter((i) => ["burgers", "doubles"].includes(i.cat)).forEach((it) =>
-    add("combo", `Combo ${it.name}`, it.price + COMBO, +(it.cost + OVERHEAD).toFixed(2), "Combo via modal (+R$ 18)", false, it.est));
+    add("combo", `Combo ${it.name}`, it.price + COMBO, +(it.cost + OVERHEAD).toFixed(2), "Combo na tela do item (+R$ 18)", false, it.est));
   [
-    ["pra-dois", "Dupla + Batata Super (via modal)", 72.9, 23.7, "Degrau do casal (R$ 60 a R$ 85)", true],
-    ["doubles", "Double The Garden (via modal)", 43.9, 10.73, "Vira Double no modal", true, true], ["doubles", "Double The Crunch (via modal)", 42.9, 10.59, "Vira Double no modal", true, true],
+    ["pra-dois", "Dupla + Batata Super (na tela do item)", 72.9, 23.7, "Degrau do casal (R$ 60 a R$ 85)", true],
+    ["doubles", "Double The Garden (na tela do item)", 43.9, 10.73, "Vira Double na tela do item", true, true], ["doubles", "Double The Crunch (na tela do item)", 42.9, 10.59, "Vira Double na tela do item", true, true],
     ["acomp", "Batata Frita Crocante Individual", 11.9, 2.02, "Ancoragem p/ combo"], ["acomp", "Batata Frita Crocante Super", 34.9, 7.09, "Compartilhado"], ["acomp", "Batata Frita Crocante Mega", 59.9, 13.57, "Upsell familiar"],
     ["acomp", "Batata Cheddar e Bacon Individual", 19.9, 4.38, "Upsell (combo turbo)", true, true], ["acomp", "Batata Cheddar e Bacon Super", 42.9, 9.93, "Compartilhado"], ["acomp", "Batata Cheddar e Bacon Mega", 79.9, 19.25, "Upsell familiar"],
     ["acomp", "Onion Rings Individual", 12.9, 2.62, "Impulso"], ["acomp", "Onion Rings Super", 36.9, 9.34, "Compartilhado"], ["acomp", "Onion Rings Mega", 62.9, 18.63, "Upsell familiar"],
     ["acomp", "Aipim Frito Individual", 12.9, 1.71, "Ancoragem p/ combo"], ["acomp", "Aipim Frito Super", 32.9, 6.17, "Ancoragem p/ combo"], ["acomp", "Aipim Frito Mega", 54.9, 11.5, "Ancoragem p/ combo"],
     ["acomp", "Chicken Bites PP", 9.9, 3.07, "Upsell", true], ["acomp", "Chicken Bites P", 28.9, 8.43, "Upsell", true], ["acomp", "Chicken Bites M", 52.9, 15.13, "Upsell", true],
     ["molhos", "Molho Verde da Casa (avulso)", 8.9, 1.74, "Pura margem (assinatura)"], ["molhos", "Molho no potinho (avulso)", 8.9, 1.7, "Pura margem"], ["molhos", "Cheddar Punch (avulso)", 11.9, 2.33, "Pura margem"],
-    ["molhos", "Molho extra no modal do item", 6.9, 1.7, "Pura margem"], ["molhos", "Trio de Molhos", 19.9, 5.4, "Pura margem", true],
+    ["molhos", "Molho extra na tela do item do item", 6.9, 1.7, "Pura margem"], ["molhos", "Trio de Molhos", 19.9, 5.4, "Pura margem", true],
     ["sobremesas", "Churros + Brigadeiro", 17.9, 4.65, "Impulso final", true], ["sobremesas", "Brigadeiro do Clube", 9.9, 2.02, "Impulso final"], ["sobremesas", "Mini Churros Individual", 11.9, 2.63, "Impulso final"], ["sobremesas", "Mini Churros Super", 32.9, 7.16, "Pequeno luxo"],
     ["bebidas", "Coca-Cola lata", 9.9, 3.64, "Ancoragem p/ combo"], ["bebidas", "Coca-Cola grande", 23.9, 9.91, "Conveniência"],
   ].forEach((r) => add(...r));
@@ -263,13 +263,13 @@
         text: "Até 5 itens, só o que puxa pedido: o carro-chefe, a porta de entrada, o 2º burger de maior margem, que ainda vende pouco (The Onion Storm, R$ 30,64), o Date Night e a âncora de teto. O topo é a zona que mais recebe olhar, e é lá que vão os itens de margem alta. Destacar os mais pedidos aumentou a demanda deles em <b>13% a 20%</b> num experimento de campo, e a seção “Mais Vendidos” do iFood teve <b>+44%</b> nas vendas originadas nela. O carrossel é recalculado a cada 30 dias com dado real do clube.",
         ref: "Traster, Foundations of Menu Planning, cap. 10 e 11 · Cai, Chen & Fang (AER, 2009) · blog iFood Parceiros" },
       "pra-dois": { title: "Pra Dois: o formato que a rede já prova", tags: ["Isca de conversão", "Formato nº 1 da rede"],
-        text: "O formato “dois burgers com desconto” foi o item com mais pedidos da rede (marca-mãe) em 2025: <b>79.661</b>, quase o dobro do 2º colocado (Combo M, 39.985). O clube nunca teve esse formato: hoje, os 3 combos pra 2 começam em R$ 96,90. A Dupla do Clube sai a <b>R$ 54,90</b> (R$ 27,45 cada) e sobe em degraus no próprio modal: <b>+R$ 24</b> com Batata Super (R$ 78,90, dentro do orçamento do casal, de R$ 60 a R$ 85) ou <b>+R$ 42</b> vira Date Night. Cada degrau tem o preço pelo CMV-alvo: 27,3%, 30,0% e 29,6%. O Date Night fica no preço de hoje, <b>R$ 96,90</b>, agora com os burgers à escolha; com 2 The B.B.C. ele sai R$ 109,90, o preço da A Dupla B.B.C. de hoje, que deixa de ser um item à parte.",
+        text: "O formato “dois burgers com desconto” foi o item com mais pedidos da rede (marca-mãe) em 2025: <b>79.661</b>, quase o dobro do 2º colocado (Combo M, 39.985). O clube nunca teve esse formato: hoje, os 3 combos pra 2 começam em R$ 96,90. A Dupla do Clube sai a <b>R$ 54,90</b> (R$ 27,45 cada) e sobe em degraus na própria tela do item: <b>+R$ 24</b> com Batata Super (R$ 78,90, dentro do orçamento do casal, de R$ 60 a R$ 85) ou <b>+R$ 42</b> vira Date Night. Cada degrau tem o preço pelo CMV-alvo: 27,3%, 30,0% e 29,6%. O Date Night fica no preço de hoje, <b>R$ 96,90</b>, agora com os burgers à escolha; com 2 The B.B.C. ele sai R$ 109,90, o preço da A Dupla B.B.C. de hoje, que deixa de ser um item à parte.",
         ref: "Itens Vendidos 2025 (rede, marca N1 Chicken) · benchmark Brasil · Nagle (conta de empate)" },
       dupla: { title: "Dupla do Clube: por que R$ 54,90", tags: ["Conta de empate", "CMV 27,3%"],
         text: "Separados, 2 The Original custam R$ 63,80. A R$ 54,90 o cliente economiza <b>R$ 8,90 (14%)</b>. Para empatar a margem total, basta vender <b>25% mais pares</b>: a margem cai de R$ 49,76 (2 avulsos) para R$ 39,90 (a dupla, já com o molho incluso).",
         ref: "Nagle, Müller & Gruyaert (break-even de desconto) · planilha CMV 2026" },
       "pra-compartilhar": { title: "Compartilhar: dentro do orçamento da galera", tags: ["Volume (grupo)", "Âncora de teto"],
-        text: "Persona Galera de Sábado (25% do público do plano, orçamento de R$ 130 a R$ 170). O Bonde fica no preço de hoje, <b>R$ 199,90</b>, e passa a levar <b>2 molhos da casa</b>: mais valor no mesmo preço, com CMV de 27,4%, dentro do limite do plano (até 30%). No modal, a galera ainda escolhe os 4 burgers e pode fechar com sobremesa pra dividir. Os Monstros (4 Double Original, R$ 229,90) têm o preço pelo CMV-alvo: custo de R$ 67,94, CMV de 29,6%, e ficam como âncora de teto. O preço “separado” é a soma com o burger mais barato.",
+        text: "Persona Galera de Sábado (25% do público do plano, orçamento de R$ 130 a R$ 170). O Bonde fica no preço de hoje, <b>R$ 199,90</b>, e passa a levar <b>2 molhos da casa</b>: mais valor no mesmo preço, com CMV de 27,4%, dentro do limite do plano (até 30%). Na tela do item, a galera ainda escolhe os 4 burgers e pode fechar com sobremesa pra dividir. Os Monstros (4 Double Original, R$ 229,90) têm o preço pelo CMV-alvo: custo de R$ 67,94, CMV de 29,6%, e ficam como âncora de teto. O preço “separado” é a soma com o burger mais barato.",
         ref: "Plano de marca §5.3 · Slim Chickens · planilha CMV" },
       burgers: { title: "A ordem é de propósito", tags: ["Kasavana & Smith", "Posição na lista"],
         text: "The Garlic abre a lista: é o único item <b>Estrela</b> da matriz (popular na rede e com margem em R$ acima da média). Itens no início e no fim de uma lista chegam a ser <b>2x mais escolhidos</b>. No fim, a entrada de preço: The Smoke (R$ 29,90). Todo burger tem no mínimo 2 tiras de sassami. Todos com nome oficial do plano da marca: The Original, The B.B.C., The Garden.",
@@ -281,9 +281,9 @@
         text: "2 tiras de sassami crocante, molho cheddar e picles: o cheddar do The B.B.C. e o picles do The Garden, que já estão na cozinha. Custo de <b>R$ 7,31</b> e CMV de 22%. Entra no lugar do The Spicy, que depende de um molho de pimenta que não está na lista de compras.",
         ref: "Planilha CMV (fichas técnicas) · plano de marca §6.3" },
       doubles: { title: "Escada Single → Double → Triple", tags: ["Good-better-best", "Dígito da esquerda"],
-        text: "Todos os 7 burgers viram Double no próprio modal por <b>+R$ 10 a +R$ 12</b>: nos 5 com Double pronto, pelo mesmo preço dele; no The Garden e no The Crunch, por +R$ 10 (custo da 2ª camada estimado), e o Double B.B.C. vira Triple por <b>+R$ 13</b>. Nenhum Double fica abaixo do preço de hoje, e todos ficam com CMV de 23% a 27%. O Triple existe para ancorar o topo e fazer o Double parecer a escolha razoável.",
+        text: "Todos os 7 burgers viram Double na própria tela do item por <b>+R$ 10 a +R$ 12</b>: nos 5 com Double pronto, pelo mesmo preço dele; no The Garden e no The Crunch, por +R$ 10 (custo da 2ª camada estimado), e o Double B.B.C. vira Triple por <b>+R$ 13</b>. Nenhum Double fica abaixo do preço de hoje, e todos ficam com CMV de 23% a 27%. O Triple existe para ancorar o topo e fazer o Double parecer a escolha razoável.",
         ref: "Thomas & Morwitz (2005) · Sharpe, Staelin & Huber (2008)" },
-      double: { title: "Vira Double: margem que sobe em R$", tags: ["Upsell no modal"],
+      double: { title: "Vira Double: margem que sobe em R$", tags: ["Upsell na tela do item"],
         text: "A 2ª camada custa de <b>R$ 2,99 a R$ 4,74</b> a mais em insumo, conforme o sabor, e soma de R$ 10 a R$ 12 ao preço, nos 5 sabores com Double pronto, exatamente o preço dele. A margem em reais do pedido sobe mesmo com CMV um pouco maior. Meta do plano: 28% dos pedidos com Double ou Triple em 90 dias.",
         ref: "Planilha CMV (Doubles) · plano de marca §12.2" },
       triple: { title: "Triple B.B.C.: âncora de teto", tags: ["Âncora real, não isca falsa"],
@@ -305,10 +305,10 @@
         text: "Sem bebida, sugere Coca (menos quando o resgate do combo ou do Date Night já traz a Coca); sem doce (nem no lanche), sobremesa; sem molho extra, o Verde da Casa (ou o Trio, se o pedido já tem Verde). Quando faltam até R$ 17,90 para a meta, o 1º card é o mais barato que libera o brinde. Acima da meta, a sacola não oferece o Brigadeiro que já vai de brinde: oferece o Mini Churros pra mergulhar nele. Se o burger foi sem combo, a sacola oferece o combo de novo, já com a escolha da Coca; se a Dupla foi sem complemento, oferece o Date Night. Barra de meta: <b>Brigadeiro de brinde acima de R$ 74,90</b> (custo R$ 2,02), sem contar os combos Pra Dois e Pra Compartilhar: eles passam da meta sozinhos, e ali o brinde seria só custo.",
         ref: "Baymard · Kivetz, Urminsky & Zheng (2006)" },
       "combo-step": { title: "Combo: uma regra só", tags: ["+R$ 18 em qualquer burger", "Nada pago pré-marcado"],
-        text: "No N1 Burger Club de hoje (iFood), o modal do burger não oferece combo: só maionese, churros e brigadeiro. O combo é um item à parte e existe para 5 dos 11 burgers, com o preço cobrado em partes (burger, batata, Coca). Agora <b>qualquer burger vira combo por +R$ 18</b>, e a economia é sempre a mesma: <b>R$ 5,80</b>. O combo fica com CMV de 28% a 31%, perto da meta de 28% do plano. O cliente precisa escolher: nenhuma opção paga vem marcada (CDC, art. 39, III).",
+        text: "No N1 Burger Club de hoje (iFood), a tela do item do burger não oferece combo: só maionese, churros e brigadeiro. O combo é um item à parte e existe para 5 dos 11 burgers, com o preço cobrado em partes (burger, batata, Coca). Agora <b>qualquer burger vira combo por +R$ 18</b>, e a economia é sempre a mesma: <b>R$ 5,80</b>. O combo fica com CMV de 28% a 31%, perto da meta de 28% do plano. O cliente precisa escolher: nenhuma opção paga vem marcada (CDC, art. 39, III).",
         ref: "R3 Regra 1 · Sharpe & Staelin (2010) · CDC" },
       turbine: { title: "Turbine: upgrade do próprio lanche", tags: ["Preço de impulso", "12% a 20% do burger"],
-        text: "O antigo Turbine vendia maionese e sobremesa. Agora é upgrade do burger: <b>bacon R$ 5,90, onion rings R$ 5,90 e cheddar R$ 4,90</b>, de 12% a 20% do preço do burger (menos nos Doubles e no Triple), e picles R$ 1,90 como impulso. Todos opcionais. A sobremesa ganhou passo próprio no modal.",
+        text: "O antigo Turbine vendia maionese e sobremesa. Agora é upgrade do burger: <b>bacon R$ 5,90, onion rings R$ 5,90 e cheddar R$ 4,90</b>, de 12% a 20% do preço do burger (menos nos Doubles e no Triple), e picles R$ 1,90 como impulso. Todos opcionais. A sobremesa ganhou passo próprio na tela do item.",
         ref: "Hayes & Dopson (adicionais como fração do item) · R3 Regra 6" },
     },
     sim: {
@@ -316,7 +316,7 @@
       levers: [
         { id: "combo", label: "Pedidos em que o burger vira combo", before: 45, after: 65, max: 90, value: 18, valueBefore: 17, cmv: 0.43, note: "combo em qualquer burger por +R$ 18" },
         { id: "dupla", label: "Pedidos com 2º burger (Dupla, Date Night)", before: 25, after: 30, max: 60, value: 23, valueBefore: 23, cmv: 0.35, note: "Dupla do Clube fixa na vitrine" },
-        { id: "turbine", label: "Pedidos com adicional no modal (Turbine ou Vira Double)", before: 3, after: 15, max: 50, value: 7.5, cmv: 0.3, note: "Turbine virou upgrade do lanche; o Double pronto já entra no burger médio" },
+        { id: "turbine", label: "Pedidos com adicional na tela do item (Turbine ou Vira Double)", before: 3, after: 15, max: 50, value: 7.5, cmv: 0.3, note: "Turbine virou upgrade do lanche; o Double pronto já entra no burger médio" },
         { id: "molho", label: "Pedidos com molho extra pago", before: 12, after: 20, max: 60, value: 6.9, valueBefore: 6.49, cmv: 0.25, note: "molho extra a R$ 6,90 no próprio item" },
         { id: "doce", label: "Pedidos com sobremesa", before: 5, after: 15, max: 40, value: 13, valueBefore: 11, cmv: 0.23, note: "“Fecha com uma sobremesa?” em todo burger, Pra Dois e Compartilhar" },
         { id: "extra", label: "Pedidos com acompanhamento extra", before: 8, after: 12, max: 40, value: 14, valueBefore: 13, cmv: 0.22, note: "Batata Cheddar e Bacon individual e Bites PP" },
@@ -326,8 +326,8 @@
     kpis: [
       { big: "100%", label: "dos burgers viram combo em 1 toque (hoje: 5 de 11, como item à parte)" },
       { big: "R$ 54,90", label: "Dupla do Clube: o formato nº 1 da rede (79.661 pedidos em 2025)" },
-      { big: "10–13%", meta: true, label: "visita → pedido em 90 dias (hoje 6,8%; o cardápio leva a cerca de 10%, o resto depende da compra)" },
-      { big: "R$ 55–62", meta: true, label: "ticket médio em 90 dias (hoje: R$ 45 a R$ 50, estimativa do plano)" },
+      { big: "0", label: "preços abaixo dos de hoje: todo preço sai do custo ÷ CMV-alvo" },
+      { big: "+4", label: "upsells na tela do lanche: Double, Turbine, molho e sobremesa" },
     ],
   };
 })();
